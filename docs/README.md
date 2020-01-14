@@ -1,3 +1,3 @@
-# WhoWouldWinSuperAlpha
-who would win for superheroes
+
 # 40kpointmanager
+The ONLY way to make your little guys work!!!!
