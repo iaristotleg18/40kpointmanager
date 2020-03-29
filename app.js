@@ -19,7 +19,8 @@ app.use(bodyParser.json());
 app.use(express.static('docs'))
 
 app.post("/api/army", function (req, res){
-  console.log(req.body)
+  console.log('======= ARMY POST REQUEST =======');
+  console.log(req)
   client.query('INSERT INTO army(name, description) VALUES($1, $2)', [req.body.name, req.body.description], (err, result) => {
     if(err) throw err;
     console.log(result)
@@ -113,11 +114,3 @@ app.get("/api/unit/:id", function (req, res) {
 })
 
 app.listen(port, () => console.log(`${port}: You are a mere pawn in the games the Emperor of Mankind plays.`))
-
-client.query('SELECT * FROM model;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-
-});
