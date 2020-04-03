@@ -20,16 +20,24 @@ $.ajax({
 
 $("#army_form").submit(function(event){
   event.preventDefault();
+  var $nameArmy = $("#armyName");
+  var nameArmy = $nameArmy.val();
+  var $descArmy = $("#descArmy");
+  var descArmy = $descArmy.val();
   $.ajax({
     method: 'post',
     url: 'http://localhost:8080' + '/api/army',
-    contentType: "application/json/",
+    contentType: "application/json",
     data: JSON.stringify({
-      name: "The Hammers of Levion",
-      description: "Mighty warriors with more strength than sense who believe they are getting a better deal while turning into Chaos Spawn."
+        name:nameArmy, description:descArmy
     })
   }).done(function(data) {
     console.log(data)
+    $nameArmy.val("");
+    $descArmy.val("");
+    var $list = $("#listArmy");
+    var element = "<li>" + nameArmy + "</li>";
+    $list.append(element);
   })
 
 });
