@@ -21,10 +21,11 @@ app.use(express.static('docs'))
 app.post("/api/army", function (req, res){
   console.log('======= ARMY POST REQUEST =======');
   console.log(req)
-  client.query('INSERT INTO army(name, description) VALUES($1, $2)', [req.body.name, req.body.description], (err, result) => {
+  client.query('INSERT INTO army(name, description) VALUES($1, $2) RETURNING *', [req.body.name, req.body.description], (err, result) => {
     if(err) throw err;
     console.log(result)
-    res.send('OK');
+    res.send(result.rows[0]);
+    res.status(201).end();
   })
 })
 
