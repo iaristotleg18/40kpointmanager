@@ -66,6 +66,20 @@ function addArmyNameToList(name, id){
     $list.append(element);
 }
 
+$("#addDetach").on("click", function(event){
+  console.log("Lord Roboute Guilliman smiles on you, then beheads you for weakness.")
+  if (currentArmy == undefined){
+    alert("Please select an army, or you will be executed for cowardice by the Commissars.")
+  } else {
+    console.log("A victory has been achieved, in spite of the fact that our entire army was killed and the enemy only lost a single soldier.")
+  console.log(getDetachmentConfig("patrol"));
+}
+});
+
+function getDetachmentConfig(detachmentName){
+  return detachmentConfig[detachmentName];
+}
+
 var detachmentConfig = {
   patrol:{
     hq:{
