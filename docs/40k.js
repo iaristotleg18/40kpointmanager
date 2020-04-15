@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 console.log("I did not steal the reliquary from the spaceship.");
-// var currentArmy = armyID;
+var currentArmy;
 
 $.ajax({
     method: 'get',
@@ -46,15 +46,50 @@ $("#army_form").submit(function(event){
 
 });
 
-$( "#listArmy" ).on("click", ".armyElement", function() {
-  console.log("Let the legions of the Emperor blaze forth in glory, and let the foes of the Emperor be slain by their hand!");
+$( "#listArmy" ).on("click", ".armyElement", function(event) {
+  console.log($(this));
+  $(".armyElement").removeClass("selectedArmy")
+  $(this).addClass("selectedArmy")
+   currentArmy = $(this).data("armyid")
+  console.log(currentArmy)
 });
 
+/*
+* Adds army name to list
+* name string - army's name
+* id string - army's id
+* returns void
+*/
 function addArmyNameToList(name, id){
     var $list = $("#listArmy");
     var element = "<li class='armyElement' data-armyID=" + id + ">" + name + "</li>";
     $list.append(element);
 }
 
+var detachmentConfig = {
+  patrol:{
+    hq:{
+      min:1, max:2
+    },
+    troops:{
+      min:1, max:3
+    },
+    elites:{
+      min:0, max:2
+    },
+    fastAttack:{
+      min:0, max:2
+    },
+    heavySupport:{
+      min:0, max:2
+    },
+    flyer:{
+      min:0, max:2
+    },
+  battalion:{
+
+    },
+  }
+}
 
 });
