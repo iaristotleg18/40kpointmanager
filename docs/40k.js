@@ -85,11 +85,139 @@ var detachmentConfig = {
     },
     flyer:{
       min:0, max:2
-    },
+    }
+  },
   battalion:{
-
+    hq:{
+      min:2, max:3
     },
-  }
+    troops:{
+      min:3, max:6
+    },
+    elites:{
+      min:0, max:6
+    },
+    fastAttack:{
+      min:0, max:3
+    },
+    heavySupport:{
+      min:0, max:3
+    },
+    flyer:{
+      min:0, max:2
+    }
+    },
+  brigade:{
+    hq:{
+      min:3, max:5
+    },
+    troops:{
+      min:3, max:6
+    },
+    elites:{
+      min:3, max:8
+    },
+    fastAttack:{
+      min:3, max:5
+    },
+    heavySupport:{
+      min:3, max:5
+    },
+    flyer:{
+      min:0, max:2
+    }
+    },
+  vanguard:{
+    hq:{
+      min:1, max:2
+    },
+    troops:{
+      min:0, max:3
+    },
+    elites:{
+      min:3, max:6
+    },
+    fastAttack:{
+      min:0, max:2
+    },
+    heavySupport:{
+      min:0, max:2
+    },
+    flyer:{
+      min:0, max:2
+    }
+    },
+  spearhead:{
+    hq:{
+      min:1, max:2
+    },
+    troops:{
+      min:0, max:3
+    },
+    elites:{
+      min:0, max:2
+    },
+    fastAttack:{
+      min:0, max:2
+    },
+    heavySupport:{
+      min:3, max:6
+    },
+    flyer:{
+      min:0, max:2
+    }
+    },
+  outrider:{
+    hq:{
+      min:1, max:2
+    },
+    troops:{
+      min:0, max:3
+    },
+    elites:{
+      min:0, max:2
+    },
+    fastAttack:{
+      min:3, max:6
+    },
+    heavySupport:{
+      min:0, max:2
+    },
+    flyer:{
+      min:0, max:2
+    }
+    },
+  supremeCommand:{
+    hq:{
+      min:3, max:5
+    },
+    elites:{
+      min:0, max:1
+    },
+    lordOfWar:{
+      min:0, max:1
+    }
+    },
+  superHeavy:{
+    lordOfWar:{
+      min:3, max:5
+    }
+    },
+  airWing:{
+    flyer:{
+      min:3, max:5
+    }
+    },
+  superHeavyAuxiliary:{
+    lordOfWar:{
+      min:0, max:1
+    }
+    },
+  fortificationNetwork:{
+    fortification:{
+      min:1, max:3
+    }
+    },
 }
 
 });
