@@ -52,6 +52,7 @@ $( "#listArmy" ).on("click", ".armyElement", function(event) {
   $(this).addClass("selectedArmy")
    currentArmy = $(this).data("armyid")
   console.log(currentArmy)
+   $("this").removeClass(".addDetach").addClass(".addDetachB");
 });
 
 /*
@@ -66,7 +67,7 @@ function addArmyNameToList(name, id){
     $list.append(element);
 }
 
-$("#addDetach").on("click", function(event){
+$(".addDetach").on("click", function(event){
   console.log("Lord Roboute Guilliman smiles on you, then beheads you for weakness.")
   if (currentArmy == undefined){
     alert("Please select an army, or you will be executed for cowardice by the Commissars.")

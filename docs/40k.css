@@ -1,3 +1,11 @@
 .selectedArmy {
   font-weight: bold;
 }
+
+.addDetach {
+  display: none;
+}
+
+.addDetachB {
+  display: block;
+}
