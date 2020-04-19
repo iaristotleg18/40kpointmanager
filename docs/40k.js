@@ -52,7 +52,7 @@ $( "#listArmy" ).on("click", ".armyElement", function(event) {
   $(this).addClass("selectedArmy")
    currentArmy = $(this).data("armyid")
   console.log(currentArmy)
-   $("this").removeClass(".addDetach").addClass(".addDetachB");
+   $("detachment_type").addClass("addDetachB");
 });
 
 /*
