@@ -19,16 +19,47 @@
 <ol id="listArmy">
 </ol>
 
-<button class="addDetach">Add a Detachment</button>
+<div class="detachment">
+  <button class="addDetach">Add a Detachment</button>
 
-<label for="detachmentTypes">Choose a detachment type</label>
-
-<select id="detachmentTypes">
+<select id="detachment_type">
+  <option value="" disabled selected>Select your option</option>
   <option value="patrol">Patrol Detachment</option>
   <option value="battalion">Battalion Detachment</option>
   <option value="brigade">Brigade Detachment</option>
   <option value="vanguard">Vanguard Detachment</option>
+  <option value="spearhead">Spearhead Detachment</option>
+  <option value="airWing">Air Wing Detachment</option>
 </select>
+  <div id="detachBoard">
+      <div id="hqBoard">
+          <select id ="hqTypes">
+            <option value="" disabled selected>Select your HQ unit!</option>
+          </select>
+          <select id ="troopsTypes">
+            <option value="" disabled selected>Select your troops unit!</option>
+          </select>
+          <select id ="elitesTypes">
+            <option value="" disabled selected>Select your elites unit!</option>
+          </select>
+          <select id ="fastAttackTypes">
+            <option value="" disabled selected>Select your fast attack unit!</option>
+          </select>
+          <select id ="heavySupportTypes">
+            <option value="" disabled selected>Select your heavy support unit!</option>
+          </select>
+          <select id ="flyerTypes">
+            <option value="" disabled selected>Select your flyer unit!</option>
+          </select>
+          <select id ="lordOfWarTypes">
+            <option value="" disabled selected>Select your lord of war unit!</option>
+          </select>
+          <select id ="fortificationTypes">
+            <option value="" disabled selected>Select your fortification unit!</option>
+          </select>
+      </div>
+  </div>
+</div>
 
 </body>
 </html>

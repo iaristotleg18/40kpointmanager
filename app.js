@@ -114,4 +114,10 @@ app.get("/api/unit/:id", function (req, res) {
   })
 })
 
+app.get("/api/model", function (req, res) {
+  client.query('SELECT * FROM model', (err, result) => {
+    res.send(result.rows)
+  })
+})
+
 app.listen(port, () => console.log(`${port}: You are a mere pawn in the games the Emperor of Mankind plays.`))

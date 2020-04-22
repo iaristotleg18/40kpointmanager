@@ -17,10 +17,11 @@ $.ajax({
 
 $.ajax({
   method: 'get',
-  url: 'http://localhost:8080' + '/api/detachment',
+  url: 'http://localhost:8080' + '/api/model',
   contentType: "application/json"
 }).done(function(data) {
   console.log(data)
+  addModelToList("#hqTypes", data[0].name, data[0].id);
 });
 
 $("#army_form").submit(function(event){
@@ -52,7 +53,7 @@ $( "#listArmy" ).on("click", ".armyElement", function(event) {
   $(this).addClass("selectedArmy")
    currentArmy = $(this).data("armyid")
   console.log(currentArmy)
-   $("detachment_type").addClass("addDetachB");
+   $(".detachment").addClass("addDetachB");
 });
 
 /*
@@ -67,6 +68,15 @@ function addArmyNameToList(name, id){
     $list.append(element);
 }
 
+function addModelToList(list_id, name, id){
+  var $select = $(list_id)
+  if ($select.length == 0){
+      throw new Error("Couldn't find the model codex within the vast vaults of Terra.")
+  }
+  var element = "<option value=" + id + ">" + name + "</option>"
+  $select.append(element);
+}
+
 $(".addDetach").on("click", function(event){
   console.log("Lord Roboute Guilliman smiles on you, then beheads you for weakness.")
   if (currentArmy == undefined){
@@ -75,6 +85,11 @@ $(".addDetach").on("click", function(event){
     console.log("A victory has been achieved, in spite of the fact that our entire army was killed and the enemy only lost a single soldier.")
   console.log(getDetachmentConfig("patrol"));
 }
+});
+
+$("#detachment_type").change(function() {
+  var currentDetachType = $(this).children("option:selected").val();
+  console.log(getDetachmentConfig(currentDetachType), "The Ultramarines are godly.")
 });
 
 function getDetachmentConfig(detachmentName){
