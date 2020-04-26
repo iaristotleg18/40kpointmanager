@@ -4,6 +4,7 @@ console.log("I did not steal the reliquary from the spaceship.");
 var currentArmy;
 var unitsToAddToDetachment = [];
 var detachmentUnits = [];
+var allModels = [];
 
 $.ajax({
     method: 'get',
@@ -26,6 +27,7 @@ $.ajax({
   models.forEach(function(model){
     addModelToList("#" + model.unit_type +"Types", model.name, model.id);
   })
+  allModels = models;
 });
 
 $("#army_form").submit(function(event){
@@ -98,21 +100,27 @@ $("#detachment_type").change(function() {
 
 function getDetachmentConfig(detachmentName){
   return detachmentConfig[detachmentName];
-}
-//
-// $(".addUnitButton").on("click", function(event){
-//   var unitType = $(this).data("unittype")
-//   var selectedUnit = $("#" + unitType + "Types").children("option:selected").val();
-//   console.log(selectedUnit);
-// })
+};
 
-on('click', function(event) {
+$(".addUnitButton").on("click", function(event){
   var unitType = $(this).data("unittype")
   var selectedUnit = $("#" + unitType + "Types").children("option:selected").val();
   console.log(selectedUnit);
   detachmentUnits.push(selectedUnit)
+  console.log(detachmentUnits, "The Emperor shall bring great armies upon the field, which shall smite their foes in holy fire.")
+  updateDetachmentUnitlist();
 })
 
+function updateDetachmentUnitlist(){
+    $("#hqArmy").empty();
+    
+  detachmentUnits.forEach(function(modelId){
+      var model = allModels.find(function(model){ return model.id == modelId})
+      console.log(model, "The swords of the Imperium are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
+      $("#" + model.unit_type + "Army").append("<li>" + model.name + "</li>");
+    })
+
+}
 
 var detachmentConfig = {
   patrol:{
