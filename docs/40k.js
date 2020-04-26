@@ -2,6 +2,8 @@ $(document).ready(function() {
 
 console.log("I did not steal the reliquary from the spaceship.");
 var currentArmy;
+var unitsToAddToDetachment = [];
+var detachmentUnits = [];
 
 $.ajax({
     method: 'get',
@@ -19,9 +21,11 @@ $.ajax({
   method: 'get',
   url: 'http://localhost:8080' + '/api/model',
   contentType: "application/json"
-}).done(function(data) {
-  console.log(data)
-  addModelToList("#hqTypes", data[0].name, data[0].id);
+}).done(function(models) {
+  console.log(models)
+  models.forEach(function(model){
+    addModelToList("#" + model.unit_type +"Types", model.name, model.id);
+  })
 });
 
 $("#army_form").submit(function(event){
@@ -71,7 +75,7 @@ function addArmyNameToList(name, id){
 function addModelToList(list_id, name, id){
   var $select = $(list_id)
   if ($select.length == 0){
-      throw new Error("Couldn't find the model codex within the vast vaults of Terra.")
+    return
   }
   var element = "<option value=" + id + ">" + name + "</option>"
   $select.append(element);
@@ -95,6 +99,20 @@ $("#detachment_type").change(function() {
 function getDetachmentConfig(detachmentName){
   return detachmentConfig[detachmentName];
 }
+//
+// $(".addUnitButton").on("click", function(event){
+//   var unitType = $(this).data("unittype")
+//   var selectedUnit = $("#" + unitType + "Types").children("option:selected").val();
+//   console.log(selectedUnit);
+// })
+
+on('click', function(event) {
+  var unitType = $(this).data("unittype")
+  var selectedUnit = $("#" + unitType + "Types").children("option:selected").val();
+  console.log(selectedUnit);
+  detachmentUnits.push(selectedUnit)
+})
+
 
 var detachmentConfig = {
   patrol:{
