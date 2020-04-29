@@ -113,7 +113,14 @@ $(".addUnitButton").on("click", function(event){
 
 function updateDetachmentUnitlist(){
     $("#hqArmy").empty();
-    
+    $("#troopsAddArmy").empty();
+    $("#elitesArmy").empty();
+    $("#fastAttackArmy").empty();
+    $("#heavySupportArmy").empty();
+    $("#flyerArmy").empty();
+    $("#lordOfWarArmy").empty();
+    $("#fortificationArmy").empty();
+
   detachmentUnits.forEach(function(modelId){
       var model = allModels.find(function(model){ return model.id == modelId})
       console.log(model, "The swords of the Imperium are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
