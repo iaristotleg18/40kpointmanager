@@ -30,63 +30,69 @@
   <option value="vanguard">Vanguard Detachment</option>
   <option value="spearhead">Spearhead Detachment</option>
   <option value="airWing">Air Wing Detachment</option>
+  <option value="outrider">Outrider Detachment</option>
+  <option value="supremeCommand">Supreme Command Detachment</option>
+  <option value="superHeavy">Super Heavy Detachment</option>
+  <option value="superHeavyAuxiliary">Super Heavy Auxiliary Detachment</option>
+  <option value="fortificationNetwork">Fortification Detachment</option>
 </select>
   <div id="detachBoard">
+    <div id="pointTotal"></div>
       <div id="hqBoard">
           <select id ="hqTypes">
             <option value="" disabled selected>Select your HQ unit!</option>
           </select>
           <button class="addUnitButton" id="hqAdd" data-unittype="hq">Add HQ Unit!</button>
-          <ol id="hqArmy"></ol>
+          <ol id="hqArmy" class="unitList"></ol>
       </div>
       <div id="troopsBoard">
         <select id ="troopsTypes">
           <option value="" disabled selected>Select your troops unit!</option>
         </select>
         <button class="addUnitButton" id="troopsAdd" data-unittype="troops">Add Troops Unit!</button>
-          <ol id="troopsArmy"></ol>
+          <ol id="troopsArmy" class="unitList"></ol>
       </div>
       <div id="elitesBoard">
         <select id ="elitesTypes">
           <option value="" disabled selected>Select your elites unit!</option>
         </select>
         <button class="addUnitButton" id="elitesAdd" data-unittype="elites">Add Elites Unit!</button>
-          <ol id="elitesArmy"></ol>
+          <ol id="elitesArmy" class="unitList"></ol>
       </div>
       <div id="fastAttackBoard">
         <select id ="fast_attackTypes">
           <option value="" disabled selected>Select your fast attack unit!</option>
         </select>
         <button class="addUnitButton" id="fastAttackAdd" data-unittype="fast_attack">Add Fast Attack Unit!</button>
-          <ol id="fastAttackArmy"></ol>
+          <ol id="fast_attackArmy" class="unitList"></ol>
       </div>
       <div id="heavySupportBoard">
         <select id ="heavy_supportTypes">
           <option value="" disabled selected>Select your heavy support unit!</option>
         </select>
         <button class="addUnitButton" id="heavySupportAdd" data-unittype="heavy_support">Add Heavy Support Unit!</button>
-          <ol id="heavySupportArmy"></ol>
+          <ol id="heavy_supportArmy" class="unitList"></ol>
       </div>
       <div id="flyerBoard">
         <select id ="flyerTypes">
           <option value="" disabled selected>Select your flyer unit!</option>
         </select>
         <button class="addUnitButton" id="flyerAdd" data-unittype="flyer">Add Flyer Unit!</button>
-          <ol id="flyerArmy"></ol>
+          <ol id="flyerArmy" class="unitList"></ol>
       </div>
       <div id="lordOfWarBoard">
         <select id ="lord_of_warTypes">
           <option value="" disabled selected>Select your lord of war unit!</option>
         </select>
         <button class="addUnitButton" id="lordOfWarAdd" data-unittype="lord_of_war">Add Lord of War Unit!</button>
-          <ol id="lordOfWarArmy"></ol>
+          <ol id="lord_of_warArmy" class="unitList"></ol>
       </div>
       <div id ="fortificationBoard">
         <select id ="fortificationTypes">
           <option value="" disabled selected>Select your fortification unit!</option>
         </select>
         <button class="addUnitButton" id="fortificationAdd" data-unittype="fortification">Add Fortification Unit!</button>
-          <ol id="fortificationArmy"></ol>
+          <ol id="fortificationArmy" class="unitList"></ol>
       </div>
   </div>
 </div>

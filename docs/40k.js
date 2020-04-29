@@ -89,7 +89,6 @@ $(".addDetach").on("click", function(event){
     alert("Please select an army, or you will be executed for cowardice by the Commissars.")
   } else {
     console.log("A victory has been achieved, in spite of the fact that our entire army was killed and the enemy only lost a single soldier.")
-  console.log(getDetachmentConfig("patrol"));
 }
 });
 
@@ -112,21 +111,21 @@ $(".addUnitButton").on("click", function(event){
 })
 
 function updateDetachmentUnitlist(){
-    $("#hqArmy").empty();
-    $("#troopsAddArmy").empty();
-    $("#elitesArmy").empty();
-    $("#fastAttackArmy").empty();
-    $("#heavySupportArmy").empty();
-    $("#flyerArmy").empty();
-    $("#lordOfWarArmy").empty();
-    $("#fortificationArmy").empty();
-
-  detachmentUnits.forEach(function(modelId){
+    $(".unitList").empty();
+    var totalPoints = 0;
+    var unitTypeCounters = {
+      hq: 0, troops: 0, elites: 0, fast_attack: 0, heavy_support: 0, flyer: 0, lord_of_war: 0, fortification: 0
+    }
+    detachmentUnits.forEach(function(modelId){
       var model = allModels.find(function(model){ return model.id == modelId})
       console.log(model, "The swords of the Imperium are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
       $("#" + model.unit_type + "Army").append("<li>" + model.name + "</li>");
-    })
-
+      totalPoints = totalPoints + model.point_value;
+      unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
+    });
+    console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for certain worlds like Cadia.")
+    $("#pointTotal").text("Army Point Total: " + totalPoints);
+    console.log(totalPoints, "The armies of the Emperor are too large to be counted, so they are measured in miles rather than men.")
 }
 
 var detachmentConfig = {
