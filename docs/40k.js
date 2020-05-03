@@ -57,7 +57,7 @@ $( "#listArmy" ).on("click", ".armyElement", function(event) {
   console.log($(this));
   $(".armyElement").removeClass("selectedArmy")
   $(this).addClass("selectedArmy")
-   currentArmy = $(this).data("armyid")
+   currentArmy = $(this).data("#armyid")
   console.log(currentArmy)
    $(".detachment").addClass("addDetachB");
 });
@@ -119,11 +119,11 @@ function updateDetachmentUnitlist(){
     detachmentUnits.forEach(function(modelId){
       var model = allModels.find(function(model){ return model.id == modelId})
       console.log(model, "The swords of the Imperium are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
-      $("#" + model.unit_type + "Army").append("<li>" + model.name + "</li>");
+      $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit'>   x </button> </li>");
       totalPoints = totalPoints + model.point_value;
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
     });
-    console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for certain worlds like Cadia.")
+    console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them.")
     $("#pointTotal").text("Army Point Total: " + totalPoints);
     console.log(totalPoints, "The armies of the Emperor are too large to be counted, so they are measured in miles rather than men.")
 }
