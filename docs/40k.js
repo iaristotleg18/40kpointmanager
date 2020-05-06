@@ -88,7 +88,7 @@ $(".addDetach").on("click", function(event){
   if (currentArmy == undefined){
     alert("Please select an army, or you will be executed for cowardice by the Commissars.")
   } else {
-    console.log("A victory has been achieved, in spite of the fact that our entire army was killed and the enemy only lost a single soldier.")
+    console.log("A victory for the Emperor has been achieved, in spite of the fact that our entire army was killed and the enemy only lost a single soldier.")
 }
 });
 
@@ -118,15 +118,19 @@ function updateDetachmentUnitlist(){
     }
     detachmentUnits.forEach(function(modelId){
       var model = allModels.find(function(model){ return model.id == modelId})
-      console.log(model, "The swords of the Imperium are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
-      $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit'>   x </button> </li>");
+      console.log(model, "The swords of the Emperor are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
+      $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit' data-id=" + model.id + ">  x  </button> </li>");
       totalPoints = totalPoints + model.point_value;
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
     });
-    console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them.")
+    console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them, and even then basically just ten worlds from Ultramar.")
     $("#pointTotal").text("Army Point Total: " + totalPoints);
     console.log(totalPoints, "The armies of the Emperor are too large to be counted, so they are measured in miles rather than men.")
 }
+
+$(".unitList").on("click", ".removeUnit", function(event) {
+  console.log(event, "The Emperor's armies are constantly culled by the tides of war, but new soldiers will replace them before the original ones even die.")
+});
 
 var detachmentConfig = {
   patrol:{
