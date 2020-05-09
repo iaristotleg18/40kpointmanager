@@ -11,10 +11,9 @@ $(document).ready(function() {
 
   // Assignment:
   // Write the correct topping to the correct number in the `My Favorite Toppings` list.
+  // My most favorite topping should go in spot #1. My least favorite topping should go in spot #6.
   //
   // Hints:
   // 1. Use jquery to update the TEXT of the span with the correct ID.
-  // 2. My most favorite topping should go in spot #1. My least favorite topping should go in spot #6.
-  // 3. To access the correct topping for the right spot you will need to use the index of the item in the array.
-
+  // 2. To access the correct topping for each spot on the list you will need to use the index of the item in the array.
 });
