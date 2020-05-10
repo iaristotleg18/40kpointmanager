@@ -116,10 +116,10 @@ function updateDetachmentUnitlist(){
     var unitTypeCounters = {
       hq: 0, troops: 0, elites: 0, fast_attack: 0, heavy_support: 0, flyer: 0, lord_of_war: 0, fortification: 0
     }
-    detachmentUnits.forEach(function(modelId){
+    detachmentUnits.forEach(function(modelId, index){
       var model = allModels.find(function(model){ return model.id == modelId})
       console.log(model, "The swords of the Emperor are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
-      $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit' data-id=" + model.id + ">  x  </button> </li>");
+      $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit' data-index=" + index + ">  x  </button> </li>");
       totalPoints = totalPoints + model.point_value;
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
     });
@@ -129,7 +129,11 @@ function updateDetachmentUnitlist(){
 }
 
 $(".unitList").on("click", ".removeUnit", function(event) {
-  console.log(event, "The Emperor's armies are constantly culled by the tides of war, but new soldiers will replace them before the original ones even die.")
+  //delete unit from array detachmentUnit
+  unitIndex = $(this).data("index")
+  detachmentUnits.splice(unitIndex, 1)
+  updateDetachmentUnitlist();
+  console.log(event, unitIndex, "The Emperor's armies are constantly culled by the tides of war, but new soldiers will replace them before the original ones even die.")
 });
 
 var detachmentConfig = {
