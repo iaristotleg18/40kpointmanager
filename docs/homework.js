@@ -16,4 +16,18 @@ $(document).ready(function() {
   // Hints:
   // 1. Use jquery to update the TEXT of the span with the correct ID.
   // 2. To access the correct topping for each spot on the list you will need to use the index of the item in the array.
+
+
+$(".toppingList").on("click", function(event){
+  $("#1").text(favoritePizzaToppings[0])
+  $("#2").text(favoritePizzaToppings[1])
+  $("#3").text(favoritePizzaToppings[2])
+  $("#4").text(favoritePizzaToppings[3])
+  $("#5").text(favoritePizzaToppings[4])
+  $("#6").text(favoritePizzaToppings[5])
+
+
+})
+
+
 });
