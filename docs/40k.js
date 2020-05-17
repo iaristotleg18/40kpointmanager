@@ -5,6 +5,7 @@ var currentArmy;
 var unitsToAddToDetachment = [];
 var detachmentUnits = [];
 var allModels = [];
+var currentDetachType;
 
 $.ajax({
     method: 'get',
@@ -93,7 +94,7 @@ $(".addDetach").on("click", function(event){
 });
 
 $("#detachment_type").change(function() {
-  var currentDetachType = $(this).children("option:selected").val();
+   currentDetachType = $(this).children("option:selected").val();
   console.log(getDetachmentConfig(currentDetachType), "The Ultramarines are godly.")
 });
 
@@ -126,7 +127,23 @@ function updateDetachmentUnitlist(){
     console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them, and even then basically just ten worlds from Ultramar.")
     $("#pointTotal").text("Army Point Total: " + totalPoints);
     console.log(totalPoints, "The armies of the Emperor are too large to be counted, so they are measured in miles rather than men.")
+    if (!currentDetachType){
+      return
+    }
+    Object.keys(unitTypeCounters).forEach(function(unitValueTypes){
+      // detachmentConfig[currentDetachType].object.keys
+        var totalUnitsPerType = unitTypeCounters[unitValueTypes]
+        var maxUnitsAllowed = detachmentConfig[currentDetachType][unitValueTypes]['max']
+        var minUnitsAllowed = detachmentConfig[currentDetachType][unitValueTypes]['min']
+
+        if (minUnitsAllowed <= totalUnitsPerType && totalUnitsPerType <= maxUnitsAllowed){
+          console.log(`${unitValueTypes} is valid for ${currentDetachType}`, "The legions of the Emperor are so vast it takes an army of bureaucrats the same size to count them all.")
+        } else {
+            console.log(`${unitValueTypes} is not valid for ${currentDetachType}`, "Sometimes, isn't red tape so fun to negotiate? The Emperor wishes that all his subjects be given the privilege of red tape, for all eternity.")
+        }
+    })
 }
+
 
 $(".unitList").on("click", ".removeUnit", function(event) {
   //delete unit from array detachmentUnit
@@ -147,10 +164,10 @@ var detachmentConfig = {
     elites:{
       min:0, max:2
     },
-    fastAttack:{
+    fast_attack:{
       min:0, max:2
     },
-    heavySupport:{
+    heavy_support:{
       min:0, max:2
     },
     flyer:{
@@ -167,10 +184,10 @@ var detachmentConfig = {
     elites:{
       min:0, max:6
     },
-    fastAttack:{
+    fast_attack:{
       min:0, max:3
     },
-    heavySupport:{
+    heavy_support:{
       min:0, max:3
     },
     flyer:{
@@ -187,10 +204,10 @@ var detachmentConfig = {
     elites:{
       min:3, max:8
     },
-    fastAttack:{
+    fast_attack:{
       min:3, max:5
     },
-    heavySupport:{
+    heavy_support:{
       min:3, max:5
     },
     flyer:{
@@ -207,10 +224,10 @@ var detachmentConfig = {
     elites:{
       min:3, max:6
     },
-    fastAttack:{
+    fast_attack:{
       min:0, max:2
     },
-    heavySupport:{
+    heavy_support:{
       min:0, max:2
     },
     flyer:{
@@ -227,10 +244,10 @@ var detachmentConfig = {
     elites:{
       min:0, max:2
     },
-    fastAttack:{
+    fast_attack:{
       min:0, max:2
     },
-    heavySupport:{
+    heavy_support:{
       min:3, max:6
     },
     flyer:{
@@ -247,10 +264,10 @@ var detachmentConfig = {
     elites:{
       min:0, max:2
     },
-    fastAttack:{
+    fast_attack:{
       min:3, max:6
     },
-    heavySupport:{
+    heavy_support:{
       min:0, max:2
     },
     flyer:{
@@ -264,12 +281,12 @@ var detachmentConfig = {
     elites:{
       min:0, max:1
     },
-    lordOfWar:{
+    lord_of_war:{
       min:0, max:1
     }
     },
   superHeavy:{
-    lordOfWar:{
+    lord_of_war:{
       min:3, max:5
     }
     },
@@ -279,7 +296,7 @@ var detachmentConfig = {
     }
     },
   superHeavyAuxiliary:{
-    lordOfWar:{
+    lord_of_war:{
       min:0, max:1
     }
     },
