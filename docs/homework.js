@@ -44,9 +44,9 @@ $(document).ready(function() {
   $('#pushItemButton').click(function(event) {
     // Dont change this
     var itemToAdd = $('#pushItem').val()
-    
+
     // "PUSH" itemToAdd onto theList
-    // YOUR CODE HERE
+    theList.push(itemToAdd)
 
     // Dont change this
     recomputeTheList();
@@ -59,7 +59,7 @@ $(document).ready(function() {
   */
   $('#popItemButton').click(function(event) {
     // "POP" an item off theList
-    // YOUR CODE HERE
+    theList.pop();
 
     // Dont change this
     recomputeTheList();
@@ -75,7 +75,7 @@ $(document).ready(function() {
     var indexOfSelectedItem = $("#allItems").children("option:selected").val();
 
     // "Splice" the selected item off theList using indexOfSelectedItem
-    // YOUR CODE HERE (hint use indexOfSelectedItem)
+    theList.splice(indexOfSelectedItem, howmany = 1)
 
     // Dont change this
     recomputeTheList();
@@ -88,8 +88,7 @@ $(document).ready(function() {
   */
   $('#shiftItemButton').click(function(event) {
     // 'Shift' the first item off the list
-    // YOUR CODE HERE
-
+    theList.shift();
     // Dont change this
     recomputeTheList();
   });
@@ -104,7 +103,7 @@ $(document).ready(function() {
     var itemToAdd = $('#unshiftItem').val()
 
     // 'Unshift' the itemToAdd to the front of the list
-    // YOUR CODE HERE
+    theList.unshift(itemToAdd)
 
     // Dont change this
     recomputeTheList();
