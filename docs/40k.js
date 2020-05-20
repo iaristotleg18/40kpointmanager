@@ -133,13 +133,26 @@ function updateDetachmentUnitlist(){
     Object.keys(unitTypeCounters).forEach(function(unitValueTypes){
       // detachmentConfig[currentDetachType].object.keys
         var totalUnitsPerType = unitTypeCounters[unitValueTypes]
-        var maxUnitsAllowed = detachmentConfig[currentDetachType][unitValueTypes]['max']
-        var minUnitsAllowed = detachmentConfig[currentDetachType][unitValueTypes]['min']
-
+        var maxUnitsAllowed;
+        var minUnitsAllowed;
+        if (unitValueTypes in detachmentConfig[currentDetachType]){
+           maxUnitsAllowed = detachmentConfig[currentDetachType][unitValueTypes]['max']
+           minUnitsAllowed = detachmentConfig[currentDetachType][unitValueTypes]['min']
+        } else {
+           maxUnitsAllowed = 0
+           minUnitsAllowed = 0
+        }
         if (minUnitsAllowed <= totalUnitsPerType && totalUnitsPerType <= maxUnitsAllowed){
           console.log(`${unitValueTypes} is valid for ${currentDetachType}`, "The legions of the Emperor are so vast it takes an army of bureaucrats the same size to count them all.")
+        $("#" + unitValueTypes + "_board .detachMessage").text("")
         } else {
             console.log(`${unitValueTypes} is not valid for ${currentDetachType}`, "Sometimes, isn't red tape so fun to negotiate? The Emperor wishes that all his subjects be given the privilege of red tape, for all eternity.")
+            $("#" + unitValueTypes + "_board .detachMessage").text("Max: " + maxUnitsAllowed + ", Min: " + minUnitsAllowed + ", Current: " + totalUnitsPerType)
+
+        }
+
+        if (minUnitsAllowed == 0 || maxUnitsAllowed == 0){
+          console.log("The Emperor has no place for stragglers or randos in his indomitable and impenetrable legions.")
         }
     })
 }
