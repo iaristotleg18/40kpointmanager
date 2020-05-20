@@ -130,8 +130,11 @@ function updateDetachmentUnitlist(){
     if (!currentDetachType){
       return
     }
+
+    // Validation code
+    // For each type of unit, check that the number of units is less than / equal to the max
+    // and more than / equal to the min.
     Object.keys(unitTypeCounters).forEach(function(unitValueTypes){
-      // detachmentConfig[currentDetachType].object.keys
         var totalUnitsPerType = unitTypeCounters[unitValueTypes]
         var maxUnitsAllowed;
         var minUnitsAllowed;
