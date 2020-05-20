@@ -1,111 +1,42 @@
 $(document).ready(function() {
 
-  // Do not manaully change the list
-  var theList = [
-    'Dog',
-    'Cat',
-    'Mouse',
-    'Chicken',
-    'Robot',
-    'Rooster',
-    'Cow',
-    'Dog'
-  ];
-
-  // Dont change this function
-  function recomputeTheList() {
-    $('#allItems').empty();
-    $('#theList').empty();
-    theList.forEach(function(item, index) {
-      $('#theList').append('<li>' + item + '</li>');
-      $('#allItems').append('<option value=' + index + '>' + item + '</option>');
-    });
+  var options = {
+    adjectives: ['old', 'funky', 'yellow', 'crossed', 'crazy', 'stuffed', 'abnormal', 'disrespectful', 'bearded', 'greedy', 'magical'],
+    adverbs: ['awkwardly', 'exactly', 'speedily', 'foolishly', 'unexpectedly', 'bravely', 'madly', 'obnoxiously'],
+    facialFeature: ['left-eye', 'right-eye', 'eyes', 'nose', 'eyebrows', 'chin', 'ears', 'forehead'],
+    catchphrases: ['Dyn-o-mite', 'ADD YOUR OWN', 'ADD YOUR OWN'],
+    gerunds: ['running', 'smashing', 'juggling', 'swimming', 'crying', 'smelling'],
+    lengthsOfTime: ['annual', 'bi-weekly', 'monthly', 'hourly', 'once-per-millenium'],
+    name: ['bob', 'june', 'pete', 'josh', 'chuck', 'mary', 'cindy'],
+    livingThing: ['person', 'dog', 'tree', 'large bird', 'skunk'],
+    verbs: ['run', 'party', 'fly', 'slide', 'dance'],
   }
-  // Dont change this
-  recomputeTheList();
 
-  // There are 5 operations you can perform on an array to change its content:
-  // 1) Push - add an item to the end of the list
-  // 2) Pop - remove the last item in the list
-  // 3) Splice - remove the item at a specific index in the list
-  // 4) Shift - remove the first item in the list
-  // 5) Unshift - add an item to the front of the list
-  //
-  // Below there are 5 sections below. In each of them you need to add a
-  // SINGLE LINE OF CODE
-  // that performs the operation for that section.
+  // In each jquery statement you need to use [] to access the words in the options object.
 
+  //First adjective
+  $("#firstAdjective").text(CODE_HERE);
+  //Second adjective
+  $("#secondAdjective").text(CODE_HERE);
+  //Third adjective
+  $("#thirdAdjective").text(CODE_HERE);
+  //Fourth adjective
+  $("#fourthAdjective").text(CODE_HERE);
+  //Name
+  $("#name").text(CODE_HERE);
+  //Noun
+  $("#noun").text(CODE_HERE);
+  //Number
+  $("#number").text(CODE_HERE);
+  //Length of Time
+  $("#lengthOfTime").text(CODE_HERE);
+  //Gerund
+  $("#gerund").text(CODE_HERE);
+  //Verb
+  $("#verb").text(CODE_HERE);
+  //Facial Feature
+  $("#facialFeature").text(CODE_HERE);
+  //Catchphrase
+  $("#catchPhrase").text(CODE_HERE);
 
-  /*
-  ============
-      PUSH
-  ============
-  */
-  $('#pushItemButton').click(function(event) {
-    // Dont change this
-    var itemToAdd = $('#pushItem').val()
-
-    // "PUSH" itemToAdd onto theList
-    theList.push(itemToAdd)
-
-    // Dont change this
-    recomputeTheList();
-  });
-
-  /*
-  ============
-      POP
-  ============
-  */
-  $('#popItemButton').click(function(event) {
-    // "POP" an item off theList
-    theList.pop();
-
-    // Dont change this
-    recomputeTheList();
-  });
-
-  /*
-  ============
-     SPLICE
-  ============
-  */
-  $('#spliceItemButton').click(function(event) {
-    // Dont change this
-    var indexOfSelectedItem = $("#allItems").children("option:selected").val();
-
-    // "Splice" the selected item off theList using indexOfSelectedItem
-    theList.splice(indexOfSelectedItem, howmany = 1)
-
-    // Dont change this
-    recomputeTheList();
-  });
-
-  /*
-  ============
-     SHIFT
-  ============
-  */
-  $('#shiftItemButton').click(function(event) {
-    // 'Shift' the first item off the list
-    theList.shift();
-    // Dont change this
-    recomputeTheList();
-  });
-
-  /*
-  ============
-     UNSHIFT
-  ============
-  */
-  $('#unshiftItemButton').click(function(event) {
-    // Dont change this
-    var itemToAdd = $('#unshiftItem').val()
-
-    // 'Unshift' the itemToAdd to the front of the list
-    theList.unshift(itemToAdd)
-
-    // Dont change this
-    recomputeTheList();
-  });
 });
