@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
+<meta charset="UTF-8">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="homework.js"></script>
 </head>
 <body>
-    
+    <form id="detachment_form">
+        <label for="type">Detachment Type</label>
+        <select id="detachment_type" name="type">
+            <option value="" disabled selected>Select your option</option>
+            <option value="patrol">Patrol Detachment</option>
+            <option value="battalion">Battalion Detachment</option>
+            <option value="brigade">Brigade Detachment</option>
+        </select>
+        <label for="cp">Command Points</label>
+        <input type="number" id="command_points" name="cp"></input>
+        <input type="submit">
+    </form>
 </body>
 </html>
