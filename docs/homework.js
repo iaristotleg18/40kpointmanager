@@ -10,6 +10,7 @@ $(document).ready(function() {
   $("#detachment_form").submit(function(event){
     event.preventDefault();
     var detachmentType = currentDetachType;
+    var armyId = 2;
 
     // YOUR CODE HERE
     var commandPoints; // Set this equal to the command points value in the input
