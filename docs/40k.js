@@ -87,7 +87,7 @@ function addModelToList(list_id, name, id){
 $(".addDetach").on("click", function(event){
   console.log("Lord Roboute Guilliman smiles on you, then beheads you for weakness.")
   if (currentArmy == undefined){
-    alert("Please select an army, or you will be executed for cowardice by the Commissars.")
+    alert("Your armies are lacklustre and tiny. Get some more soldiers and do the Emperor proud.")
   } else {
     console.log("A victory for the Emperor has been achieved, in spite of the fact that our entire army was killed and the enemy only lost a single soldier.")
 }
@@ -131,6 +131,7 @@ function updateDetachmentUnitlist(){
       return
     }
 
+      var validIs = true
     // Validation code
     // For each type of unit, check that the number of units is less than / equal to the max
     // and more than / equal to the min.
@@ -150,14 +151,15 @@ function updateDetachmentUnitlist(){
         $("#" + unitValueTypes + "_board .detachMessage").text("")
         } else {
             console.log(`${unitValueTypes} is not valid for ${currentDetachType}`, "Sometimes, isn't red tape so fun to negotiate? The Emperor wishes that all his subjects be given the privilege of red tape, for all eternity.")
+            validIs = false
             $("#" + unitValueTypes + "_board .detachMessage").text("Max: " + maxUnitsAllowed + ", Min: " + minUnitsAllowed + ", Current: " + totalUnitsPerType)
-
-        }
+          }
 
         if (minUnitsAllowed == 0 || maxUnitsAllowed == 0){
           console.log("The Emperor has no place for stragglers or randos in his indomitable and impenetrable legions.")
         }
     })
+          console.log(validIs, "The detachment is true by the name of the Emperor")
 }
 
 

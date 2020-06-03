@@ -17,6 +17,15 @@ $(document).ready(function() {
 
     console.log(detachmentType);
 
+    $.ajax({
+      method: 'get',
+      url: 'http://localhost:8080' + '/api/detachment',
+      contentType: "application/json"
+    }).done(function(data){
+      console.log("runner scott")
+      data: JSON.stringify({detachment_type:currentDetachType, armyId, });      
+    })
+
     // Add an AJAX post request
     // The request should add a detachment to the DB
     //
