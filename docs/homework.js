@@ -13,17 +13,21 @@ $(document).ready(function() {
     var armyId = 2;
 
     // YOUR CODE HERE
-    var commandPoints; // Set this equal to the command points value in the input
+    var commandPoints = 1;
 
     console.log(detachmentType);
 
     $.ajax({
-      method: 'get',
+      method: 'post',
       url: 'http://localhost:8080' + '/api/detachment',
-      contentType: "application/json"
+      contentType: "application/json",
+      data: JSON.stringify({
+          detachment_type:currentDetachType,
+          command_points:commandPoints,
+          army_id:armyId
+      })
     }).done(function(data){
-      console.log("runner scott")
-      data: JSON.stringify({detachment_type:currentDetachType, armyId, });      
+       console.log(data, "The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
     })
 
     // Add an AJAX post request

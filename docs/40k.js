@@ -6,6 +6,8 @@ var unitsToAddToDetachment = [];
 var detachmentUnits = [];
 var allModels = [];
 var currentDetachType;
+var validIsDetachment = false;
+var currentDetachCommand;
 
 $.ajax({
     method: 'get',
@@ -58,7 +60,7 @@ $( "#listArmy" ).on("click", ".armyElement", function(event) {
   console.log($(this));
   $(".armyElement").removeClass("selectedArmy")
   $(this).addClass("selectedArmy")
-   currentArmy = $(this).data("#armyid")
+   currentArmy = $(this).data("armyid")
   console.log(currentArmy)
    $(".detachment").addClass("addDetachB");
 });
@@ -88,14 +90,28 @@ $(".addDetach").on("click", function(event){
   console.log("Lord Roboute Guilliman smiles on you, then beheads you for weakness.")
   if (currentArmy == undefined){
     alert("Your armies are lacklustre and tiny. Get some more soldiers and do the Emperor proud.")
+  } else if (validIsDetachment == false) {
+    alert("Your Baneblades have somehow ended up with the scouts.")
   } else {
-    console.log("A victory for the Emperor has been achieved, in spite of the fact that our entire army was killed and the enemy only lost a single soldier.")
+    $.ajax({
+      method: 'post',
+      url: 'http://localhost:8080' + '/api/detachment',
+      contentType: "application/json",
+      data: JSON.stringify({
+          detachment_type:currentDetachType,
+          command_points:currentDetachCommand,
+          army_id:currentArmy
+      })
+    }).done(function(data){
+       console.log(data, "The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
+    })
 }
 });
 
 $("#detachment_type").change(function() {
    currentDetachType = $(this).children("option:selected").val();
   console.log(getDetachmentConfig(currentDetachType), "The Ultramarines are godly.")
+  currentDetachCommand = $(this).children("option:selected").data("commandpoints");
 });
 
 function getDetachmentConfig(detachmentName){
@@ -131,7 +147,7 @@ function updateDetachmentUnitlist(){
       return
     }
 
-      var validIs = true
+       validIsDetachment = true
     // Validation code
     // For each type of unit, check that the number of units is less than / equal to the max
     // and more than / equal to the min.
@@ -151,15 +167,14 @@ function updateDetachmentUnitlist(){
         $("#" + unitValueTypes + "_board .detachMessage").text("")
         } else {
             console.log(`${unitValueTypes} is not valid for ${currentDetachType}`, "Sometimes, isn't red tape so fun to negotiate? The Emperor wishes that all his subjects be given the privilege of red tape, for all eternity.")
-            validIs = false
+            validIsDetachment = false
             $("#" + unitValueTypes + "_board .detachMessage").text("Max: " + maxUnitsAllowed + ", Min: " + minUnitsAllowed + ", Current: " + totalUnitsPerType)
           }
-
         if (minUnitsAllowed == 0 || maxUnitsAllowed == 0){
           console.log("The Emperor has no place for stragglers or randos in his indomitable and impenetrable legions.")
         }
     })
-          console.log(validIs, "The detachment is true by the name of the Emperor")
+          console.log(validIsDetachment, "The detachment is true by the name of the Emperor")
 }
 
 
