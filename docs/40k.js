@@ -2,7 +2,6 @@ $(document).ready(function() {
 
 console.log("I did not steal the reliquary from the spaceship.");
 var currentArmy;
-var unitsToAddToDetachment = [];
 var detachmentUnits = [];
 var allModels = [];
 var currentDetachType;
@@ -57,12 +56,10 @@ $("#army_form").submit(function(event){
 });
 
 $( "#listArmy" ).on("click", ".armyElement", function(event) {
-  console.log($(this));
   $(".armyElement").removeClass("selectedArmy")
   $(this).addClass("selectedArmy")
-   currentArmy = $(this).data("armyid")
-  console.log(currentArmy)
-   $(".detachment").addClass("addDetachB");
+  currentArmy = $(this).data("armyid")
+  $(".detachment").addClass("addDetachB");
 });
 
 /*
@@ -105,7 +102,7 @@ $(".addDetach").on("click", function(event){
     }).done(function(data){
        console.log(data, "The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
     })
-}
+  }
 });
 
 $("#detachment_type").change(function() {
@@ -147,7 +144,7 @@ function updateDetachmentUnitlist(){
       return
     }
 
-       validIsDetachment = true
+    validIsDetachment = true
     // Validation code
     // For each type of unit, check that the number of units is less than / equal to the max
     // and more than / equal to the min.
@@ -174,7 +171,7 @@ function updateDetachmentUnitlist(){
           console.log("The Emperor has no place for stragglers or randos in his indomitable and impenetrable legions.")
         }
     })
-          console.log(validIsDetachment, "The detachment is true by the name of the Emperor")
+    console.log(validIsDetachment, "The detachment is true by the name of the Emperor")
 }
 
 
