@@ -5,9 +5,9 @@ $(document).ready(function() {
 
   // Models we want to add to our DB
   var allModels = [
-    { id: 1, name: 'Bad Man', point_value: 3},
-    { id: 2, name: 'Cool Woman', point_value: 10},
-    { id: 3, name: 'Silly Child', point_value: 2},
+    { id: 1, name: 'Miles Gloriosus', point_value: 3},
+    { id: 2, name: 'Servus Callidus', point_value: 10},
+    { id: 3, name: 'Adulescens Amator', point_value: 2},
   ];
 
   /*
@@ -28,9 +28,14 @@ $(document).ready(function() {
 
   var newArray = []; // DO NOT CHANGE
 
-  // YOUR CODE GOES HERE
-  // YOUR CODE GOES HERE
-  // YOUR CODE GOES HERE
+  detachmentUnits.forEach(function(allModels){
+    allModels.push(detachmentUnits)
+    console.log(allModels)
+  })
+
+  allModels.forEach(function(newArray){
+    newArray.push(allModels)
+  })
 
   console.log(newArray); // DO NOT CHANGE
 });
