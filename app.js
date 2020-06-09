@@ -1,5 +1,6 @@
 console.log("I am a scion of the Emperor's blood.")
 
+const pgFormat = require('pg-format');
 const { Client } = require('pg');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -36,7 +37,7 @@ app.get("/api/army", function (req, res) {
     // res.send('The Emperor looks kindly upon you.');
     res.send(result.rows)
   })
-})
+}) 
 
 app.get("/api/army/:id", function (req, res) {
   client.query('SELECT * FROM army WHERE id = $1', [req.params.id], (err, result) => {
@@ -84,14 +85,37 @@ app.get("/api/detachment/:id", function (req, res) {
 
 app.post("/api/unit", function (req, res) {
   console.log(req.body)
-  if(!req.body.point_value || !req.body.model_id || !req.body.detachment_id){
-    throw new Error("Invalid request. Must have point value, model id, and detachment id.");
+
+  // Add multiple units at once
+  if (req.body.units) {
+    var unitsToAdd = [];
+    req.body.units.forEach(function(unit) {
+      unit.detachment_id = req.body.detachment_id;
+      if (!unit.point_value || !unit.model_id || !unit.detachment_id) {
+        throw new Error("Invalid request. All units must have point value, model id, and detachment id.");
+      }
+      unitsToAdd.push([unit.point_value, unit.model_id, unit.detachment_id]);
+    });
+
+    var addMultipleUnitsQuery = pgFormat('INSERT INTO unit (point_value, model_id, detachment_id) VALUES %L', unitsToAdd);
+    return client.query(addMultipleUnitsQuery, (err, result) => {
+      if(err) throw err;
+      console.log(result)
+      res.send('OK');
+    });
+  
+  // Only add one unit
+  } else {
+    if(!req.body.point_value || !req.body.model_id || !req.body.detachment_id){
+      throw new Error("Invalid request. Must have point value, model id, and detachment id.");
+    }
+
+    return client.query('INSERT INTO unit(point_value, model_id, detachment_id) VALUES($1, $2, $3)', [req.body.point_value, req.body.model_id, req.body.detachment_id], (err, result) => {
+      if(err) throw err;
+      console.log(result)
+      res.send('OK');
+    })
   }
-  client.query('INSERT INTO unit(point_value, model_id, detachment_id) VALUES($1, $2, $3)', [req.body.point_value, req.body.model_id, req.body.detachment_id], (err, result) => {
-    if(err) throw err;
-    console.log(result)
-    res.send('OK');
-  })
 })
 
 app.get("/api/unit", function (req, res) {
