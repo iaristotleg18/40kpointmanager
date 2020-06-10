@@ -22,7 +22,20 @@ $(document).ready(function() {
   // Add a request to post the newArray to your backend.
   // This should add all the units to the unit table.
 
-  // YOUR CODE HERE
-  // YOUR CODE HERE
-  // YOUR CODE HERE
+  $.ajax({
+    method: 'post',
+    url: 'http://localhost:8080' + '/api/units',
+    contentType: "application/json",
+    data: JSON.stringify({
+        id:unitIds,
+        point_value:units.point_value,
+        model_id:units.model_id,
+        detachmentId:detachmentId
+
+    })
+  }).done(function(data){
+     console.log("The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
+  })
+
+
 });
