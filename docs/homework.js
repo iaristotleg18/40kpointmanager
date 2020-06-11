@@ -24,13 +24,11 @@ $(document).ready(function() {
 
   $.ajax({
     method: 'post',
-    url: 'http://localhost:8080' + '/api/units',
+    url: 'http://localhost:8080' + '/api/unit',
     contentType: "application/json",
     data: JSON.stringify({
-        id:unitIds,
-        point_value:units.point_value,
-        model_id:units.model_id,
-        detachmentId:detachmentId
+        units:units,
+        detachment_id:detachmentId
 
     })
   }).done(function(data){

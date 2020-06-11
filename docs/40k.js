@@ -90,6 +90,7 @@ $(".addDetach").on("click", function(event){
   } else if (validIsDetachment == false) {
     alert("Your Baneblades have somehow ended up with the scouts.")
   } else {
+    var detachId;
     $.ajax({
       method: 'post',
       url: 'http://localhost:8080' + '/api/detachment',
@@ -101,7 +102,26 @@ $(".addDetach").on("click", function(event){
       })
     }).done(function(data){
        console.log(data, "The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
+         var detachId = data.rows[0].id
+         console.log(detachId, "The Emperor's serried ranks stretch across the horizon, into the eternal darkness where they stand strong until they die.")
+         var modelAdd = [];
+         detachmentUnits.forEach(function(id){
+           allModels.forEach(function(model){
+             if (id == model.id){
+               modelAdd.push(model)
+             }
+           })
+         })
+         $.ajax({
+           method: 'post',
+           url: 'http://localhost:8080' + '/api/unit',
+           contentType: "application/json",
+           data: JSON.stringify({
+               units:modelAdd,
+               detachment_id:detachId
+           })
     })
+  })
   }
 });
 

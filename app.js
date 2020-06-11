@@ -37,7 +37,7 @@ app.get("/api/army", function (req, res) {
     // res.send('The Emperor looks kindly upon you.');
     res.send(result.rows)
   })
-}) 
+})
 
 app.get("/api/army/:id", function (req, res) {
   client.query('SELECT * FROM army WHERE id = $1', [req.params.id], (err, result) => {
@@ -47,16 +47,16 @@ app.get("/api/army/:id", function (req, res) {
 
 app.post("/api/detachment", function (req, res){
   console.log(req.body)
-  if(!req.body.detachment_type || !req.body.command_points || !req.body.army_id){
+  if(!req.body.detachment_type || req.body.command_points === undefined || !req.body.army_id){
     throw new Error("Invalid request. Must have detachment type, command points, and army id.");
   }
   if(!req.body.name) {
     req.body.name = req.body.detachment_type;
   }
-  client.query('INSERT INTO detachment(name, command_points, detachment_type, army_id) VALUES($1, $2, $3, $4)', [req.body.name, req.body.command_points, req.body.detachment_type, req.body.army_id], (err, result) => {
+  client.query('INSERT INTO detachment(name, command_points, detachment_type, army_id) VALUES($1, $2, $3, $4) returning id', [req.body.name, req.body.command_points, req.body.detachment_type, req.body.army_id], (err, result) => {
     if(err) throw err;
     console.log(result)
-    res.send('OK');
+    res.send(result);
 
   })
 })
@@ -91,6 +91,7 @@ app.post("/api/unit", function (req, res) {
     var unitsToAdd = [];
     req.body.units.forEach(function(unit) {
       unit.detachment_id = req.body.detachment_id;
+      console.log(unit, "The Emperor's armies must be assembled in the most proper way.")
       if (!unit.point_value || !unit.model_id || !unit.detachment_id) {
         throw new Error("Invalid request. All units must have point value, model id, and detachment id.");
       }
@@ -103,7 +104,7 @@ app.post("/api/unit", function (req, res) {
       console.log(result)
       res.send('OK');
     });
-  
+
   // Only add one unit
   } else {
     if(!req.body.point_value || !req.body.model_id || !req.body.detachment_id){
