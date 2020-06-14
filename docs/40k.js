@@ -108,7 +108,8 @@ $(".addDetach").on("click", function(event){
          detachmentUnits.forEach(function(id){
            allModels.forEach(function(model){
              if (id == model.id){
-               modelAdd.push(model)
+               var newUnit = {modelId: modelId, point_value: model.point_value
+               modelAdd.push(newUnit)
              }
            })
          })
@@ -127,7 +128,7 @@ $(".addDetach").on("click", function(event){
 
 $("#detachment_type").change(function() {
    currentDetachType = $(this).children("option:selected").val();
-  console.log(getDetachmentConfig(currentDetachType), "The Ultramarines are godly.")
+  console.log(getDetachmentConfig(currentDetachType), "The Ultramarines are godly, and all other chapters must bask in said godliness..")
   currentDetachCommand = $(this).children("option:selected").data("commandpoints");
 });
 
@@ -157,7 +158,7 @@ function updateDetachmentUnitlist(){
       totalPoints = totalPoints + model.point_value;
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
     });
-    console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them, and even then basically just ten worlds from Ultramar.")
+    console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them.")
     $("#pointTotal").text("Army Point Total: " + totalPoints);
     console.log(totalPoints, "The armies of the Emperor are too large to be counted, so they are measured in miles rather than men.")
     if (!currentDetachType){
