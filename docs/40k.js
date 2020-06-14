@@ -60,8 +60,25 @@ $( "#listArmy" ).on("click", ".armyElement", function(event) {
   $(this).addClass("selectedArmy")
   currentArmy = $(this).data("armyid")
   $(".detachment").addClass("addDetachB");
+  $.ajax({
+    method: 'get',
+    url: 'http://localhost:8080' + '/api/detachment',
+    contentType: "application/json",
+    data: {army:currentArmy}
+  }).done(function(data) {
+    console.log(data, "The muster of the Emperor's armies is so complex and gigantic in scale that a group of teens from the 21st Century must calculate it all.")
+    $("#listDetach").empty();
+    data.forEach(function(detachment){
+      addDetachNameToList(detachment.name, detachment.id);
+    })
+  })
 });
 
+function addDetachNameToList(name, id){
+  var $list = $("#listDetach");
+  var detachElement = "<li class='detachElement' data-detachId=" + id + ">" + name + "</li>";
+  $list.append(detachElement)
+}
 /*
 * Adds army name to list
 * name string - army's name
@@ -344,11 +361,6 @@ var detachmentConfig = {
   airWing:{
     flyer:{
       min:3, max:5
-    }
-    },
-  superHeavyAuxiliary:{
-    lord_of_war:{
-      min:0, max:1
     }
     },
   fortificationNetwork:{
