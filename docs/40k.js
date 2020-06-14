@@ -108,7 +108,7 @@ $(".addDetach").on("click", function(event){
          detachmentUnits.forEach(function(id){
            allModels.forEach(function(model){
              if (id == model.id){
-               var newUnit = {modelId: modelId, point_value: model.point_value
+               var newUnit = {model_id: model.id, point_value: model.point_value}
                modelAdd.push(newUnit)
              }
            })
