@@ -7,6 +7,7 @@ var allModels = [];
 var currentDetachType;
 var validIsDetachment = false;
 var currentDetachCommand;
+var totalPoints = 0;
 
 $.ajax({
     method: 'get',
@@ -68,9 +69,15 @@ $( "#listArmy" ).on("click", ".armyElement", function(event) {
   }).done(function(data) {
     console.log(data, "The muster of the Emperor's armies is so complex and gigantic in scale that a group of teens from the 21st Century must calculate it all.")
     $("#listDetach").empty();
+    var totalCommandPoints = 0;
+    var totalArmyPoints = 0;
     data.forEach(function(detachment){
       addDetachNameToList(detachment.name, detachment.id);
+      totalCommandPoints += detachment.command_points;
+      totalArmyPoints += detachment.total_points;
     })
+    $("#armyCommandPoints").text(totalCommandPoints)
+    $("#totalArmyPoints").text(totalArmyPoints)
   })
 });
 
@@ -115,7 +122,8 @@ $(".addDetach").on("click", function(event){
       data: JSON.stringify({
           detachment_type:currentDetachType,
           command_points:currentDetachCommand,
-          army_id:currentArmy
+          army_id:currentArmy,
+          total_points:totalPoints
       })
     }).done(function(data){
        console.log(data, "The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
@@ -164,7 +172,7 @@ $(".addUnitButton").on("click", function(event){
 
 function updateDetachmentUnitlist(){
     $(".unitList").empty();
-    var totalPoints = 0;
+     totalPoints = 0;
     var unitTypeCounters = {
       hq: 0, troops: 0, elites: 0, fast_attack: 0, heavy_support: 0, flyer: 0, lord_of_war: 0, fortification: 0
     }
@@ -176,7 +184,7 @@ function updateDetachmentUnitlist(){
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
     });
     console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them.")
-    $("#pointTotal").text("Army Point Total: " + totalPoints);
+    $("#pointTotal").text("Detachment Point Total: " + totalPoints);
     console.log(totalPoints, "The armies of the Emperor are too large to be counted, so they are measured in miles rather than men.")
     if (!currentDetachType){
       return

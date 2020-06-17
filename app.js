@@ -47,13 +47,13 @@ app.get("/api/army/:id", function (req, res) {
 
 app.post("/api/detachment", function (req, res){
   console.log(req.body)
-  if(!req.body.detachment_type || req.body.command_points === undefined || !req.body.army_id){
-    throw new Error("Invalid request. Must have detachment type, command points, and army id.");
+  if(!req.body.detachment_type || req.body.command_points === undefined || !req.body.army_id || req.body.total_points === undefined){
+    throw new Error("Invalid request. Must have detachment type, command points, army points, and army id.");
   }
   if(!req.body.name) {
     req.body.name = req.body.detachment_type;
   }
-  client.query('INSERT INTO detachment(name, command_points, detachment_type, army_id) VALUES($1, $2, $3, $4) returning id', [req.body.name, req.body.command_points, req.body.detachment_type, req.body.army_id], (err, result) => {
+  client.query('INSERT INTO detachment(name, command_points, detachment_type, army_id, total_points) VALUES($1, $2, $3, $4, $5) returning id', [req.body.name, req.body.command_points, req.body.detachment_type, req.body.army_id, req.body.total_points], (err, result) => {
     if(err) throw err;
     console.log(result)
     res.send(result);
