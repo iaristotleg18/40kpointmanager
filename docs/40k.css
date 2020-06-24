@@ -9,3 +9,7 @@
 .addDetachB {
   display: block;
 }
+
+#totalArmyWork {
+  padding-left: 10px;
+}

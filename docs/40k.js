@@ -350,7 +350,7 @@ var detachmentConfig = {
       min:0, max:2
     }
     },
-  supremeCommand:{
+  supreme_command:{
     hq:{
       min:3, max:5
     },
@@ -361,17 +361,17 @@ var detachmentConfig = {
       min:0, max:1
     }
     },
-  superHeavy:{
+  super_heavy:{
     lord_of_war:{
       min:3, max:5
     }
     },
-  airWing:{
+  air_wing:{
     flyer:{
       min:3, max:5
     }
     },
-  fortificationNetwork:{
+  fortification_network:{
     fortification:{
       min:1, max:3
     }
