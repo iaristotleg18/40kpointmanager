@@ -6,10 +6,12 @@
   <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <LINK REL=StyleSheet HREF="40k.css" TYPE="text/css" MEDIA=screen>
+        <LINK REL=StyleSheet HREF="bootstrap-combobox.css" TYPE="text/css" MEDIA=screen>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="40k.js"></script>
-    <script src="typeahead.bundle.min.js"></script>
+      <script src="bootstrap-combobox.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -57,86 +59,92 @@
   <div id="detachBoard">
     <div id="pointTotal"></div>
       <div id="hq_board">
-          <select id ="hqTypes">
+        <div class="plusmodel">
+          <select id ="hqTypes" class="allTypes">
             <option value="" disabled selected>Select your HQ unit!</option>
           </select>
-          <br>
-          <input type="text" autocomplete="off" id="hqSearch">
-          <br>
-          <button class="addUnitButton" id="hqAdd" data-unittype="hq">Add HQ Unit!</button>
+          <button class="addUnitButton" id="hqAdd" data-unittype="hq">+</button>
+        </div>
+           <div class = "detachMessage">Get some of your favorite characters like Marneus Calgar, Primaris Marneus Calgar, Super Smash Marneus Calgar, Godzilla Marneus Calgar, and Spiritual Liege Marneus Calgar. - Games Workshop</div>
           <ol id="hqArmy" class="unitList"></ol>
       </div>
       <div id="troops_board">
-        <select id ="troopsTypes">
+        <div class="plusmodel">
+        <select id ="troopsTypes" class="allTypes">
           <option value="" disabled selected>Select your troops unit!</option>
         </select>
-        <br>
-        <input type="text" autocomplete="off" id="troopsSearch">
-        <br>
-        <button class="addUnitButton" id="troopsAdd" data-unittype="troops">Add Troops Unit!</button>
-
+        <button class="addUnitButton" id="troopsAdd" data-unittype="troops">+</button>
+      </div>
+        <div class = "detachMessage">These are useless - Games Workshop</div>
           <ol id="troopsArmy" class="unitList"></ol>
       </div>
       <div id="elites_board">
-        <select id ="elitesTypes">
+        <div class="plusmodel">
+        <select id ="elitesTypes" class="allTypes">
           <option value="" disabled selected>Select your elites unit!</option>
         </select>
-      <br>
-      <input type="text" autocomplete="off" id="elitesSearch">
-      <br>
-        <button class="addUnitButton" id="elitesAdd" data-unittype="elites">Add Elites Unit!</button>
+
+        <button class="addUnitButton" id="elitesAdd" data-unittype="elites">+</button>
+      </div>
+        <div class = "detachMessage">These are useless - Games Workshop</div>
+
           <ol id="elitesArmy" class="unitList"></ol>
       </div>
       <div id="fast_attack_board">
-        <select id ="fast_attackTypes">
+        <div class="plusmodel">
+        <select id ="fast_attackTypes" class="allTypes">
           <option value="" disabled selected>Select your fast attack unit!</option>
         </select>
-        <br>
-        <input type="text" autocomplete="off" id="fastAttackSearch">
-        <br>
-        <button class="addUnitButton" id="fastAttackAdd" data-unittype="fast_attack">Add Fast Attack Unit!</button>
+
+        <button class="addUnitButton" id="fastAttackAdd" data-unittype="fast_attack">+</button>
+      </div>
+        <div class = "detachMessage">These are useless - Games Workshop</div>
+
           <ol id="fast_attackArmy" class="unitList"></ol>
       </div>
       <div id="heavy_support_board">
-        <select id ="heavy_supportTypes">
+        <div class="plusmodel">
+        <select id ="heavy_supportTypes" class="allTypes">
           <option value="" disabled selected>Select your heavy support unit!</option>
         </select>
-        <br>
-        <input type="text" autocomplete="off" id="heavySupportSearch">
-        <br>
-        <button class="addUnitButton" id="heavySupportAdd" data-unittype="heavy_support">Add Heavy Support Unit!</button>
+        <button class="addUnitButton" id="heavySupportAdd" data-unittype="heavy_support">+</button>
+      </div>
+        <div class = "detachMessage">These are useless - Games Workshop</div>
+
           <ol id="heavy_supportArmy" class="unitList"></ol>
       </div>
       <div id="flyer_board">
-        <select id ="flyerTypes">
+        <div class="plusmodel">
+        <select id ="flyerTypes" class="allTypes">
           <option value="" disabled selected>Select your flyer unit!</option>
         </select>
-        <br>
-        <input type="text" autocomplete="off" id="flyerSearch">
-        <br>
-        <button class="addUnitButton" id="flyerAdd" data-unittype="flyer">Add Flyer Unit!</button>
+
+        <button class="addUnitButton" id="flyerAdd" data-unittype="flyer">+</button>
+      </div>
+        <div class = "detachMessage">These are useless - Games Workshop</div>
 
           <ol id="flyerArmy" class="unitList"></ol>
       </div>
       <div id="lord_of_war_board">
-        <select id ="lord_of_warTypes">
+        <div class="plusmodel">
+        <select id ="lord_of_warTypes" class="allTypes">
           <option value="" disabled selected>Select your lord of war unit!</option>
         </select>
-        <br>
-        <input type="text" autocomplete="off" id="lordOfWarSearch">
-        <br>
-        <button class="addUnitButton" id="lordOfWarAdd" data-unittype="lord_of_war">Add Lord of War Unit!</button>
+
+        <button class="addUnitButton" id="lordOfWarAdd" data-unittype="lord_of_war">+</button>
+      </div>
+        <div class = "detachMessage">These are useless - Games Workshop</div>
 
           <ol id="lord_of_warArmy" class="unitList"></ol>
       </div>
       <div id ="fortification_board">
-        <select id ="fortificationTypes">
+        <div class="plusmodel">
+        <select id ="fortificationTypes" class="allTypes">
           <option value="" disabled selected>Select your fortification unit!</option>
         </select>
-        <br>
-        <input type="text" autocomplete="off" id="fortificationSearch">
-        <br>
-        <button class="addUnitButton" id="fortificationAdd" data-unittype="fortification">Add Fortification Unit!</button>
+        <button class="addUnitButton" id="fortificationAdd" data-unittype="fortification">+</button>
+      </div>
+        <div class = "detachMessage">These are useless - Games Workshop</div>
 
           <ol id="fortificationArmy" class="unitList"></ol>
       </div>

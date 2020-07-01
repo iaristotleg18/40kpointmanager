@@ -13,3 +13,7 @@
 #totalArmyWork {
   padding-left: 10px;
 }
+
+.plusmodel  {
+  display: flex;
+}

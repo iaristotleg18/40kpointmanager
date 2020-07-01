@@ -30,6 +30,7 @@ $.ajax({
   models.forEach(function(model){
     addModelToList("#" + model.unit_type +"Types", model.name, model.id);
   })
+    $(".allTypes").combobox();
   allModels = models;
 });
 
@@ -219,6 +220,7 @@ function updateDetachmentUnitlist(){
     })
     console.log(validIsDetachment, "The detachment is true by the name of the Emperor")
 }
+
 
 
 $(".unitList").on("click", ".removeUnit", function(event) {
