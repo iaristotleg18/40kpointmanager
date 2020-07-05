@@ -12,8 +12,23 @@
 
 #totalArmyWork {
   padding-left: 10px;
+  padding-right: 100px;
 }
 
 .plusmodel  {
   display: flex;
+}
+
+.bbutton {
+  padding-left: 6px;
+}
+
+#totalBoard {
+  display:flex
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+}
+
+#army_form {
+  padding-right: 6px;
 }

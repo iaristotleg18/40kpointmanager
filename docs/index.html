@@ -58,14 +58,15 @@
 </select>
   <div id="detachBoard">
     <div id="pointTotal"></div>
+    <div id="totalBoard">
       <div id="hq_board">
         <div class="plusmodel">
           <select id ="hqTypes" class="allTypes">
             <option value="" disabled selected>Select your HQ unit!</option>
           </select>
-          <button class="addUnitButton" id="hqAdd" data-unittype="hq">+</button>
+            <span class="bbutton"><button class="addUnitButton" id="hqAdd" data-unittype="hq">+</button></span>
         </div>
-           <div class = "detachMessage">Get some of your favorite characters like Marneus Calgar, Primaris Marneus Calgar, Super Smash Marneus Calgar, Godzilla Marneus Calgar, and Spiritual Liege Marneus Calgar. - Games Workshop</div>
+           <div class = "detachMessage">Gee Dubs likey - Games Workshop</div>
           <ol id="hqArmy" class="unitList"></ol>
       </div>
       <div id="troops_board">
@@ -73,7 +74,7 @@
         <select id ="troopsTypes" class="allTypes">
           <option value="" disabled selected>Select your troops unit!</option>
         </select>
-        <button class="addUnitButton" id="troopsAdd" data-unittype="troops">+</button>
+    <span class="bbutton"><button class="addUnitButton" id="troopsAdd" data-unittype="troops">+</button></span>
       </div>
         <div class = "detachMessage">These are useless - Games Workshop</div>
           <ol id="troopsArmy" class="unitList"></ol>
@@ -83,8 +84,7 @@
         <select id ="elitesTypes" class="allTypes">
           <option value="" disabled selected>Select your elites unit!</option>
         </select>
-
-        <button class="addUnitButton" id="elitesAdd" data-unittype="elites">+</button>
+            <span class="bbutton"><button class="addUnitButton" id="elitesAdd" data-unittype="elites">+</button></span>
       </div>
         <div class = "detachMessage">These are useless - Games Workshop</div>
 
@@ -95,8 +95,7 @@
         <select id ="fast_attackTypes" class="allTypes">
           <option value="" disabled selected>Select your fast attack unit!</option>
         </select>
-
-        <button class="addUnitButton" id="fastAttackAdd" data-unittype="fast_attack">+</button>
+          <span class="bbutton"><button class="addUnitButton" id="fastAttackAdd" data-unittype="fast_attack">+</button></span>
       </div>
         <div class = "detachMessage">These are useless - Games Workshop</div>
 
@@ -107,7 +106,7 @@
         <select id ="heavy_supportTypes" class="allTypes">
           <option value="" disabled selected>Select your heavy support unit!</option>
         </select>
-        <button class="addUnitButton" id="heavySupportAdd" data-unittype="heavy_support">+</button>
+          <span class="bbutton"><button class="addUnitButton" id="heavySupportAdd" data-unittype="heavy_support">+</button></span>
       </div>
         <div class = "detachMessage">These are useless - Games Workshop</div>
 
@@ -118,20 +117,17 @@
         <select id ="flyerTypes" class="allTypes">
           <option value="" disabled selected>Select your flyer unit!</option>
         </select>
-
-        <button class="addUnitButton" id="flyerAdd" data-unittype="flyer">+</button>
+        <span class="bbutton"><button class="addUnitButton" id="flyerAdd" data-unittype="flyer">+</button></span>
       </div>
-        <div class = "detachMessage">These are useless - Games Workshop</div>
-
-          <ol id="flyerArmy" class="unitList"></ol>
+      <div class = "detachMessage">These are useless - Games Workshop</div>
+      <ol id="flyerArmy" class="unitList"></ol>
       </div>
       <div id="lord_of_war_board">
         <div class="plusmodel">
         <select id ="lord_of_warTypes" class="allTypes">
           <option value="" disabled selected>Select your lord of war unit!</option>
         </select>
-
-        <button class="addUnitButton" id="lordOfWarAdd" data-unittype="lord_of_war">+</button>
+          <span class="bbutton"><button class="addUnitButton" id="lordOfWarAdd" data-unittype="lord_of_war">+</button></span>
       </div>
         <div class = "detachMessage">These are useless - Games Workshop</div>
 
@@ -142,13 +138,13 @@
         <select id ="fortificationTypes" class="allTypes">
           <option value="" disabled selected>Select your fortification unit!</option>
         </select>
-        <button class="addUnitButton" id="fortificationAdd" data-unittype="fortification">+</button>
+          <span class="bbutton"><button class="addUnitButton" id="fortificationAdd" data-unittype="fortification">+</button></span>
       </div>
         <div class = "detachMessage">These are useless - Games Workshop</div>
-
           <ol id="fortificationArmy" class="unitList"></ol>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
