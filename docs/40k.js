@@ -40,6 +40,7 @@ $("#army_form").submit(function(event){
   var nameArmy = $nameArmy.val();
   var $descArmy = $("#descArmy");
   var descArmy = $descArmy.val();
+    console.log(nameArmy, descArmy, "The Imperial armies will march at a minute's notice, once the requisite paperwork has been filled out.")
 
   $.ajax({
     method: 'post',
@@ -57,10 +58,24 @@ $("#army_form").submit(function(event){
 
 });
 
-$( "#listArmy" ).on("click", ".armyElement", function(event) {
-  $(".armyElement").removeClass("selectedArmy")
-  $(this).addClass("selectedArmy")
-  currentArmy = $(this).data("armyid")
+$("#addForm").click(function(){
+  $("#armyFormWrapper, #hideForm").removeClass("hiddenForm")
+  $("#addForm").addClass("hiddenForm")
+  console.log("The Emperor's wrath extends to many things, including but not limited to: religion, trains, artificial intelligence, hoagies, aliens, and his own people.")
+})
+
+$("#hideForm").click(function(){
+  $("#armyFormWrapper, #hideForm").addClass("hiddenForm");
+  $("#addForm").removeClass("hiddenForm")
+  console.log("The compassion of the Emperor is never in doubt as his Commissars execute innocent men.")
+})
+
+$( "#listArmy").change(function(event) {
+  currentArmy = $(this).children("option:selected").val();
+  console.log(currentArmy, "The mightiest of soldiers stand strong and bold before the Emperor, while the weak run for cover.")
+  if (currentArmy == undefined) {
+    return
+  }
   $(".detachment").addClass("addDetachB");
   $.ajax({
     method: 'get',
@@ -95,7 +110,7 @@ function addDetachNameToList(name, id){
 */
 function addArmyNameToList(name, id){
     var $list = $("#listArmy");
-    var element = "<li class='armyElement' data-armyID=" + id + ">" + name + "</li>";
+    var element = "<option class='armyElement' value=" + id + ">" + name + "</option>";
     $list.append(element);
 }
 

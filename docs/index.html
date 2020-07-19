@@ -12,35 +12,33 @@
       <script src="bootstrap-combobox.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <title>Build your armies and muster your command for war! Battle for the Imperium/Destroy the Corpse Emperor/Be a xenos!</title>
+
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
 
+<div id="armyFormWrapper"  class="hiddenForm">
 <form id="army_form">
-  <label for="name">Army Name</label>
-  <input type="text" id="armyName" name="name"></input>
-  <label for="description">Army Description</label>
-  <input type="text" id="descArmy" name="description"></input>
-  <input type="submit">
+  <div class="form-group">
+    <label for="name">Army Name</label>
+    <input type="text" class="form-control" id="armyName" placeholder="Enter army name">
+  </div>
+  <div class="form-group">
+    <label for="description">Army Description</label>
+    <input type="text" class="form-control" id="descArmy" placeholder="Enter description">
+  </div>
+  <input type="submit" class="btn btn-primary"></input>
 </form>
-
-<div class="allTypes">
-<ol id="listArmy">
-</ol>
+</div>
+<div class="plusmodel" id="armySelect">
+<select id="listArmy" class="allTypes">
+  <option></option>
+</select><button type="button" id="addForm" class="bbutton">Add Army</button>
+<button type="button" id="hideForm" class="bbutton hiddenForm">Cancel</button>
 </div>
 
 <div id = "totalArmyWork">
-
-
-  <div> Total Command Points: <span id="armyCommandPoints"></span></div>
-
-  <div> Total Army Points: <span id="totalArmyPoints"></span></div>
-
-</br>
-  <div>Existing Detachments</div>
-
-<ol id="listDetach">
-</ol>
 
 <div class="detachment">
   <button class="addDetach">Add a Detachment</button>
@@ -57,9 +55,19 @@
   <option value="supreme_command" data-commandpoints='1'>Supreme Command Detachment</option>
   <option value="super_heavy" data-commandpoints='1'>Super Heavy Detachment</option>
   <option value="fortification_network" data-commandpoints='1'>Fortification Detachment</option>
+
 </select>
+
   <div id="detachBoard">
+
+      <div>Existing Detachments</div>
+      <ol id="listDetach">
+      </ol>
+      <div class="detachBoard"> Total Command Points: <span id="armyCommandPoints"></span></div>
+      <div class="detachBoard"> Total Army Points: <span id="totalArmyPoints"></span></div>
+
     <div id="pointTotal"></div>
+
     <div id="totalBoard">
       <div id="hq_board">
         <div class="plusmodel">

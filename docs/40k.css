@@ -17,35 +17,73 @@
 body {
   padding-left: 24px;
   padding-right:24px;
+  padding-top: 24px;
+}
+
+#armySelect {
+  margin-bottom: 24px;
 }
 
 .plusmodel  {
   display: flex;
 }
 
+#detachBoard {
+  margin-top: 24px;
+}
+
+#totalBoard {
+  margin-top: 24px;
+}
+
 .bbutton {
   padding-left: 6px;
 }
 
+#armyForm {
+  padding-left: 300px;
+}
+
 #totalBoard {
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-auto-rows: minmax(180px, auto);
   grid-row-gap: 12px;
+  grid-column-gap: 12px;
+  background-color:bg:secondary;
 }
 
-@media all and (min-width: 150px){
-  #totalBoard{
-    grid-template-columns: 1fr;
+.hiddenForm {
+  display:none !important;
+}
+
+#hq_board, #elites_board, #heavy_support_board, #lord_of_war_board {
+  background-color:rgb(255, 109, 71);
+  border-radius: 25px;
+}
+
+#troops_board, #fast_attack_board, #flyer_board, #fortification_board {
+  background-color:rgb(79, 150, 216);
+  border-radius: 25px;
+
+}
+
+
+  @media all and (min-width: 700px){
+    #totalBoard{
+      grid-template-columns: 1fr 1fr;
+    }
   }
-}
 
-  @media all and (min-width: 600px){
+  @media all and (min-width: 1100px){
     #totalBoard{
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
 
+.allTypes {
+  width: 300px;
+}
 
 
 #army_form {
