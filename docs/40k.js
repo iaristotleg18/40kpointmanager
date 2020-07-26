@@ -70,12 +70,18 @@ $("#hideForm").click(function(){
   console.log("The compassion of the Emperor is never in doubt as his Commissars execute innocent men.")
 })
 
+$("#detachment_type").change(function(event) {
+  $("#totalBoard").removeClass("hiddenForm")
+  console.log("Every day, numerous lives are removed from the great ledgers of the Emperor, brought down by their own humanity.")
+})
+
 $( "#listArmy").change(function(event) {
   currentArmy = $(this).children("option:selected").val();
   console.log(currentArmy, "The mightiest of soldiers stand strong and bold before the Emperor, while the weak run for cover.")
   if (currentArmy == undefined) {
     return
   }
+
   $(".detachment").addClass("addDetachB");
   $.ajax({
     method: 'get',

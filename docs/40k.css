@@ -20,6 +20,7 @@ body {
   padding-top: 24px;
 }
 
+
 #armySelect {
   margin-bottom: 24px;
 }
@@ -44,6 +45,14 @@ body {
   padding-left: 300px;
 }
 
+#briefingWrapper {
+  margin-bottom: 20px;
+}
+
+.detachWrapper {
+  display: flex;
+}
+
 #totalBoard {
   display:grid;
   grid-template-columns: 1fr;
@@ -58,13 +67,18 @@ body {
 }
 
 #hq_board, #elites_board, #heavy_support_board, #lord_of_war_board {
-  background-color:rgb(255, 109, 71);
+  background-color:rgb(210, 210, 210);
   border-radius: 25px;
+  padding-left: 20px;
+  padding-top: 10px;
+
 }
 
 #troops_board, #fast_attack_board, #flyer_board, #fortification_board {
-  background-color:rgb(79, 150, 216);
+  background-color:rgb(170, 170, 170);
   border-radius: 25px;
+  padding-left: 20px;
+  padding-top: 10px;
 
 }
 
@@ -80,6 +94,7 @@ body {
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
+
 
 .allTypes {
   width: 300px;

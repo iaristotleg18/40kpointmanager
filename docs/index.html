@@ -41,9 +41,18 @@
 <div id = "totalArmyWork">
 
 <div class="detachment">
-  <button class="addDetach">Add a Detachment</button>
 
-<select id="detachment_type">
+  <div id="briefingWrapper">
+    <div>Existing Detachments</div>
+    <ol id="listDetach">
+    </ol>
+    <div class="detachBoard"> Total Command Points: <span id="armyCommandPoints"></span></div>
+    <div class="detachBoard"> Total Army Points: <span id="totalArmyPoints"></span></div>
+  </div>
+
+
+<div class="detachWrapper">
+<select id="detachment_type" class="allTypes">
   <option value="" disabled selected>Select your option</option>
   <option value="patrol" data-commandpoints='0'>Patrol Detachment</option>
   <option value="battalion" data-commandpoints='3'>Battalion Detachment</option>
@@ -57,18 +66,14 @@
   <option value="fortification_network" data-commandpoints='1'>Fortification Detachment</option>
 
 </select>
+<button class="addDetach">Add Detachment</button>
+</div>
 
   <div id="detachBoard">
 
-      <div>Existing Detachments</div>
-      <ol id="listDetach">
-      </ol>
-      <div class="detachBoard"> Total Command Points: <span id="armyCommandPoints"></span></div>
-      <div class="detachBoard"> Total Army Points: <span id="totalArmyPoints"></span></div>
-
     <div id="pointTotal"></div>
 
-    <div id="totalBoard">
+    <div id="totalBoard" class="hiddenForm">
       <div id="hq_board">
         <div class="plusmodel">
           <select id ="hqTypes" class="allTypes">
@@ -76,6 +81,8 @@
           </select>
             <span class="bbutton"><button class="addUnitButton" id="hqAdd" data-unittype="hq">+</button></span>
         </div>
+        <span class="armyTitle">HQ Units</span>
+
            <div class = "detachMessage">Gee Dubs likey - Games Workshop</div>
           <ol id="hqArmy" class="unitList"></ol>
       </div>
@@ -86,6 +93,8 @@
         </select>
     <span class="bbutton"><button class="addUnitButton" id="troopsAdd" data-unittype="troops">+</button></span>
       </div>
+      <span class="armyTitle">Troops Units</span>
+
         <div class = "detachMessage">These are useless - Games Workshop</div>
           <ol id="troopsArmy" class="unitList"></ol>
       </div>
@@ -96,6 +105,8 @@
         </select>
             <span class="bbutton"><button class="addUnitButton" id="elitesAdd" data-unittype="elites">+</button></span>
       </div>
+      <span class="armyTitle">Elites Units</span>
+
         <div class = "detachMessage">These are useless - Games Workshop</div>
 
           <ol id="elitesArmy" class="unitList"></ol>
@@ -107,6 +118,8 @@
         </select>
           <span class="bbutton"><button class="addUnitButton" id="fastAttackAdd" data-unittype="fast_attack">+</button></span>
       </div>
+      <span class="armyTitle">Fast Attack Units</span>
+
         <div class = "detachMessage">These are useless - Games Workshop</div>
 
           <ol id="fast_attackArmy" class="unitList"></ol>
@@ -118,6 +131,8 @@
         </select>
           <span class="bbutton"><button class="addUnitButton" id="heavySupportAdd" data-unittype="heavy_support">+</button></span>
       </div>
+      <span class="armyTitle">Heavy Support Units</span>
+
         <div class = "detachMessage">These are useless - Games Workshop</div>
 
           <ol id="heavy_supportArmy" class="unitList"></ol>
@@ -129,6 +144,8 @@
         </select>
         <span class="bbutton"><button class="addUnitButton" id="flyerAdd" data-unittype="flyer">+</button></span>
       </div>
+      <span class="armyTitle">Flyer Units</span>
+
       <div class = "detachMessage">These are useless - Games Workshop</div>
       <ol id="flyerArmy" class="unitList"></ol>
       </div>
@@ -139,8 +156,8 @@
         </select>
           <span class="bbutton"><button class="addUnitButton" id="lordOfWarAdd" data-unittype="lord_of_war">+</button></span>
       </div>
+      <span class="armyTitle">Lord Of War Units</span>
         <div class = "detachMessage">These are useless - Games Workshop</div>
-
           <ol id="lord_of_warArmy" class="unitList"></ol>
       </div>
       <div id ="fortification_board">
@@ -150,6 +167,7 @@
         </select>
           <span class="bbutton"><button class="addUnitButton" id="fortificationAdd" data-unittype="fortification">+</button></span>
       </div>
+      <span class="armyTitle">Fortification Units</span>
         <div class = "detachMessage">These are useless - Games Workshop</div>
           <ol id="fortificationArmy" class="unitList"></ol>
       </div>
