@@ -53,12 +53,22 @@ app.post("/api/detachment", function (req, res){
   if(!req.body.name) {
     req.body.name = req.body.detachment_type;
   }
-  client.query('INSERT INTO detachment(name, command_points, detachment_type, army_id, total_points) VALUES($1, $2, $3, $4, $5) returning id', [req.body.name, req.body.command_points, req.body.detachment_type, req.body.army_id, req.body.total_points], (err, result) => {
+  client.query('INSERT INTO detachment(name, command_points, detachment_type, army_id, total_points) VALUES($1, $2, $3, $4, $5) returning id, name, command_points, total_points', [req.body.name, req.body.command_points, req.body.detachment_type, req.body.army_id, req.body.total_points], (err, result) => {
     if(err) throw err;
     console.log(result)
     res.send(result);
 
   })
+})
+app.delete("/api/detachment", function (req, res) {
+  if(!req.query.id) {
+    throw new Error("Invalid request. Must have detachment id.")
+  } else {
+    client.query('HOMEWORK', [req.query.id], (err, result) => {
+      console.log(result.rows)
+      res.send(result.rows)
+    });
+  }
 })
 
 app.get("/api/detachment", function (req, res) {

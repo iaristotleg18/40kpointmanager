@@ -8,6 +8,7 @@ var currentDetachType;
 var validIsDetachment = false;
 var currentDetachCommand;
 var totalPoints = 0;
+$(".addDetach").prop('disabled', true);
 
 $.ajax({
     method: 'get',
@@ -54,6 +55,10 @@ $("#army_form").submit(function(event){
     $nameArmy.val("");
     $descArmy.val("");
     addArmyNameToList(data.name, data.id);
+    console.log("THE EMPEROR DEMANDS THE UTMOST ATTENTION AND OBSESSING-OVER!!!!!!!!!!!!")
+    $('select#listArmy').each(function(){
+    $(this).data('combobox').refresh();
+});
   })
 
 });
@@ -78,7 +83,7 @@ $("#detachment_type").change(function(event) {
 $( "#listArmy").change(function(event) {
   currentArmy = $(this).children("option:selected").val();
   console.log(currentArmy, "The mightiest of soldiers stand strong and bold before the Emperor, while the weak run for cover.")
-  if (currentArmy == undefined) {
+  if (currentArmy == undefined || currentArmy == "") {
     return
   }
 
@@ -118,6 +123,7 @@ function addArmyNameToList(name, id){
     var $list = $("#listArmy");
     var element = "<option class='armyElement' value=" + id + ">" + name + "</option>";
     $list.append(element);
+
 }
 
 function addModelToList(list_id, name, id){
@@ -150,6 +156,13 @@ $(".addDetach").on("click", function(event){
     }).done(function(data){
        console.log(data, "The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
          var detachId = data.rows[0].id
+         var totalCommandPoints = Number($("#armyCommandPoints").text())
+         var totalArmyPoints = Number($("#totalArmyPoints").text())
+           addDetachNameToList(data.rows[0].name, data.rows[0].id);
+           totalCommandPoints += data.rows[0].command_points;
+           totalArmyPoints += data.rows[0].total_points;
+         $("#armyCommandPoints").text(totalCommandPoints)
+         $("#totalArmyPoints").text(totalArmyPoints)
          console.log(detachId, "The Emperor's serried ranks stretch across the horizon, into the eternal darkness where they stand strong until they die.")
          var modelAdd = [];
          detachmentUnits.forEach(function(id){
@@ -179,6 +192,8 @@ $("#detachment_type").change(function() {
   currentDetachCommand = $(this).children("option:selected").data("commandpoints");
 });
 
+
+
 function getDetachmentConfig(detachmentName){
   return detachmentConfig[detachmentName];
 };
@@ -189,10 +204,10 @@ $(".addUnitButton").on("click", function(event){
   console.log(selectedUnit);
   detachmentUnits.push(selectedUnit)
   console.log(detachmentUnits, "The Emperor shall bring great armies upon the field, which shall smite their foes in holy fire.")
-  updateDetachmentUnitlist();
+  updateDetachmentUnitList();
 })
 
-function updateDetachmentUnitlist(){
+function updateDetachmentUnitList(){
     $(".unitList").empty();
      totalPoints = 0;
     var unitTypeCounters = {
@@ -239,6 +254,9 @@ function updateDetachmentUnitlist(){
           console.log("The Emperor has no place for stragglers or randos in his indomitable and impenetrable legions.")
         }
     })
+      if (validIsDetachment == true){
+        $(".addDetach").prop('disabled', false);
+      }
     console.log(validIsDetachment, "The detachment is true by the name of the Emperor")
 }
 
@@ -248,9 +266,16 @@ $(".unitList").on("click", ".removeUnit", function(event) {
   //delete unit from array detachmentUnit
   unitIndex = $(this).data("index")
   detachmentUnits.splice(unitIndex, 1)
-  updateDetachmentUnitlist();
+  updateDetachmentUnitList();
   console.log(event, unitIndex, "The Emperor's armies are constantly culled by the tides of war, but new soldiers will replace them before the original ones even die.")
 });
+
+$(".clearUnits").on("click", function(event) {
+  detachmentUnits = [];
+  updateDetachmentUnitList();
+  console.log("The Emperor wipes from his ledgers the stains of his fallen and accepts them into the ranks of his immortal legions.")
+})
+
 
 var detachmentConfig = {
   patrol:{

@@ -104,3 +104,7 @@ body {
 #army_form {
   padding-right: 6px;
 }
+
+#armyFormWrapper {
+  margin-bottom: 16px;
+}
