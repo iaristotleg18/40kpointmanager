@@ -86,6 +86,10 @@ app.get("/api/detachment", function (req, res) {
   };
 })
 
+client.query('DELETE FROM detachment WHERE id = $1', [req.query.id], (err, result) => {
+res.send(result.rows[0])
+})
+
 
 app.get("/api/detachment/:id", function (req, res) {
   client.query('SELECT * FROM detachment WHERE id = $1', [req.params.id], (err, result) => {
