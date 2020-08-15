@@ -110,9 +110,23 @@ $( "#listArmy").change(function(event) {
 
 function addDetachNameToList(name, id){
   var $list = $("#listDetach");
-  var detachElement = "<li class='detachElement' data-detachId=" + id + ">" + name + "</li>";
+  var detachElement = "<li class='detachElement' data-detachId=" + id + ">" + name +  " <button class = 'deleteDetach'>x</button></li>";
   $list.append(detachElement)
 }
+
+$("#listDetach").on("click", ".deleteDetach", function(event) {
+  console.log(event, "When vengeance comes, it is at the hands of the Sons of Hor- wait! That guy killed our Emperor!")
+  var detachId = $(this).data("detachid")
+  console.log(this)
+  $.ajax({
+      method: 'delete',
+      url: 'http://localhost:8080' + '/api/detachment/' + detachId,
+      contentType: "application/json",
+    }).done(function(data){
+        $(this).remove();
+        console.log("The neccessary prerequisite paperwork has been completed, so the Word Bearers can go to Istv - wait! That means they can go slaughter loyal Imperials!")
+      })
+});
 /*
 * Adds army name to list
 * name string - army's name

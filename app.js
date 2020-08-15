@@ -60,15 +60,15 @@ app.post("/api/detachment", function (req, res){
 
   })
 })
-app.delete("/api/detachment", function (req, res) {
+app.delete("/api/detachment/:id", function (req, res) {
+  console.log(req.query, "In His eternal wisdom, the Emperor must wipe from his commands those that do not stand before his exacting standards.")
   if(!req.query.id) {
     throw new Error("Invalid request. Must have detachment id.")
   } else {
-    client.query('HOMEWORK', [req.query.id], (err, result) => {
-      console.log(result.rows)
-      res.send(result.rows)
-    });
-  }
+    client.query('DELETE FROM detachment WHERE id = $1', [req.query.id], (err, result) => {
+    res.send(result.rows[0])
+    })
+    }
 })
 
 app.get("/api/detachment", function (req, res) {
@@ -86,9 +86,7 @@ app.get("/api/detachment", function (req, res) {
   };
 })
 
-client.query('DELETE FROM detachment WHERE id = $1', [req.query.id], (err, result) => {
-res.send(result.rows[0])
-})
+
 
 
 app.get("/api/detachment/:id", function (req, res) {
