@@ -117,13 +117,14 @@ function addDetachNameToList(name, id){
 $("#listDetach").on("click", ".deleteDetach", function(event) {
   console.log(event, "When vengeance comes, it is at the hands of the Sons of Hor- wait! That guy killed our Emperor!")
   var detachId = $(this).data("detachid")
+    var $detachmentElement = $(this).closest(detachId)
   console.log(this)
   $.ajax({
       method: 'delete',
       url: 'http://localhost:8080' + '/api/detachment/' + detachId,
       contentType: "application/json",
     }).done(function(data){
-        $(this).remove();
+        $($detachmentElement).remove();
         console.log("The neccessary prerequisite paperwork has been completed, so the Word Bearers can go to Istv - wait! That means they can go slaughter loyal Imperials!")
       })
 });
