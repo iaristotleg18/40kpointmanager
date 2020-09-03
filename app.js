@@ -61,11 +61,11 @@ app.post("/api/detachment", function (req, res){
   })
 })
 app.delete("/api/detachment/:id", function (req, res) {
-  console.log(req.query, "In His eternal wisdom, the Emperor must wipe from his commands those that do not stand before his exacting standards.")
-  if(!req.query.id) {
+  console.log(req.params, "In His eternal wisdom, the Emperor must wipe from his commands those that do not stand before his exacting standards.")
+  if(!req.params.id) {
     throw new Error("Invalid request. Must have detachment id.")
   } else {
-    client.query('DELETE FROM detachment WHERE id = $1', [req.query.id], (err, result) => {
+    client.query('DELETE FROM detachment WHERE id = $1', [req.params.id], (err, result) => {
     res.send(result.rows[0])
     })
     }

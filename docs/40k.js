@@ -99,32 +99,58 @@ $( "#listArmy").change(function(event) {
     var totalCommandPoints = 0;
     var totalArmyPoints = 0;
     data.forEach(function(detachment){
-      addDetachNameToList(detachment.name, detachment.id);
+      addDetachNameToList(detachment.name, detachment.id, detachment.command_points, detachment.total_points);
       totalCommandPoints += detachment.command_points;
       totalArmyPoints += detachment.total_points;
     })
     $("#armyCommandPoints").text(totalCommandPoints)
+    determine9eStatistics(totalArmyPoints, data.length)
     $("#totalArmyPoints").text(totalArmyPoints)
   })
 });
 
-function addDetachNameToList(name, id){
+function determine9eStatistics(totalArmyPoints, numberOfDetachments){
+  var validArmyType = {}
+  Object.keys(gameSizeConfig).forEach(function(gameSizeKey){
+    if(gameSizeConfig[gameSizeKey].detachmentsAllowed >= numberOfDetachments){
+      if(gameSizeConfig[gameSizeKey].totalPointsAllowed.min <= totalArmyPoints){
+        if(gameSizeConfig[gameSizeKey].totalPointsAllowed.max >= totalArmyPoints){
+            validArmyType.name = gameSizeKey
+            validArmyType.remainingCommandPoints = gameSizeConfig[gameSizeKey].startingCommandPoints - numberOfDetachments * 2
+        }
+      }
+    }
+  })
+  $("#commandSpent").text(validArmyType.remainingCommandPoints)
+  $("#detachPermitted").text(validArmyType.name)
+}
+
+function addDetachNameToList(name, id, command_points, total_points){
   var $list = $("#listDetach");
-  var detachElement = "<li class='detachElement' data-detachId=" + id + ">" + name +  " <button class = 'deleteDetach'>x</button></li>";
+  var detachElement = "<li class='detachElement' data-detachId=" + id + " data-commandpoints=" + command_points + " data-totalpoints=" + total_points + ">" + name +  " <button class = 'deleteDetach'>x</button></li>";
   $list.append(detachElement)
 }
 
 $("#listDetach").on("click", ".deleteDetach", function(event) {
   console.log(event, "When vengeance comes, it is at the hands of the Sons of Hor- wait! That guy killed our Emperor!")
-  var detachId = $(this).data("detachid")
-    var $detachmentElement = $(this).closest(detachId)
+    var $detachmentElement = $(this).closest(".detachElement")
+    var detachId = $detachmentElement.data("detachid")
+    var commandpoints = $detachmentElement.data("commandpoints")
+    var totalpoints = $detachmentElement.data("totalpoints")
+    console.log(detachId, "The forms have been delivered on time, so the Emperor's Children can - wait! That means they can go kill Ferrus Manus!")
   console.log(this)
   $.ajax({
       method: 'delete',
       url: 'http://localhost:8080' + '/api/detachment/' + detachId,
       contentType: "application/json",
     }).done(function(data){
-        $($detachmentElement).remove();
+        $detachmentElement.remove();
+        var totalCommandPoints = Number($("#armyCommandPoints").text())
+        var totalArmyPoints = Number($("#totalArmyPoints").text())
+          totalCommandPoints -= commandpoints;
+          totalArmyPoints -= totalpoints;
+        $("#armyCommandPoints").text(totalCommandPoints)
+        $("#totalArmyPoints").text(totalArmyPoints)
         console.log("The neccessary prerequisite paperwork has been completed, so the Word Bearers can go to Istv - wait! That means they can go slaughter loyal Imperials!")
       })
 });
@@ -173,7 +199,7 @@ $(".addDetach").on("click", function(event){
          var detachId = data.rows[0].id
          var totalCommandPoints = Number($("#armyCommandPoints").text())
          var totalArmyPoints = Number($("#totalArmyPoints").text())
-           addDetachNameToList(data.rows[0].name, data.rows[0].id);
+           addDetachNameToList(data.rows[0].name, data.rows[0].id, data.rows[0].command_points, data.rows[0].total_points);
            totalCommandPoints += data.rows[0].command_points;
            totalArmyPoints += data.rows[0].total_points;
          $("#armyCommandPoints").text(totalCommandPoints)
@@ -290,6 +316,39 @@ $(".clearUnits").on("click", function(event) {
   updateDetachmentUnitList();
   console.log("The Emperor wipes from his ledgers the stains of his fallen and accepts them into the ranks of his immortal legions.")
 })
+
+var gameSizeConfig = {
+  combatPatrol:{
+    totalPointsAllowed: {
+      min:1, max: 500,
+    },
+    detachmentsAllowed: 1,
+    startingCommandPoints: 3
+  },
+  incursion:{
+    totalPointsAllowed: {
+      min:501, max: 1000,
+    },
+    detachmentsAllowed: 2,
+    startingCommandPoints: 6
+  },
+  strikeForce:{
+    totalPointsAllowed: {
+      min:1001, max: 2000,
+    },
+    detachmentsAllowed: 3,
+    startingCommandPoints: 12
+  },
+  onslaught:{
+    totalPointsAllowed: {
+      min:2001, max: 3000,
+    },
+    detachmentsAllowed: 4,
+    startingCommandPoints: 18
+  }
+}
+
+
 
 
 var detachmentConfig = {
