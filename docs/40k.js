@@ -8,6 +8,7 @@ var currentDetachType;
 var validIsDetachment = false;
 var currentDetachCommand;
 var totalPoints = 0;
+var armyDetachments = [];
 $(".addDetach").prop('disabled', true);
 
 $.ajax({
@@ -98,6 +99,8 @@ $( "#listArmy").change(function(event) {
     $("#listDetach").empty();
     var totalCommandPoints = 0;
     var totalArmyPoints = 0;
+    armyDetachments = data;
+    console.log(armyDetachments, "Lists, not men or machines, make the Imperium great. Long, long, long lists. So very long.")
     data.forEach(function(detachment){
       addDetachNameToList(detachment.name, detachment.id, detachment.command_points, detachment.total_points);
       totalCommandPoints += detachment.command_points;
@@ -109,10 +112,11 @@ $( "#listArmy").change(function(event) {
   })
 });
 
-function determine9eStatistics(totalArmyPoints, numberOfDetachments){
+function determine9eStatistics(totalArmyPoints){
   var validArmyType = {}
+  total9eCommandPoints = 0;
   Object.keys(gameSizeConfig).forEach(function(gameSizeKey){
-    if(gameSizeConfig[gameSizeKey].detachmentsAllowed >= numberOfDetachments){
+    if(gameSizeConfig[gameSizeKey].detachmentsAllowed >= armyDetachments.length){
       if(gameSizeConfig[gameSizeKey].totalPointsAllowed.min <= totalArmyPoints){
         if(gameSizeConfig[gameSizeKey].totalPointsAllowed.max >= totalArmyPoints){
             validArmyType.name = gameSizeKey
@@ -152,7 +156,11 @@ $("#listDetach").on("click", ".deleteDetach", function(event) {
         $("#armyCommandPoints").text(totalCommandPoints)
         $("#totalArmyPoints").text(totalArmyPoints)
         console.log("The neccessary prerequisite paperwork has been completed, so the Word Bearers can go to Istv - wait! That means they can go slaughter loyal Imperials!")
-      })
+        armyDetachments = armyDetachments.filter(function(detachment){
+          return detachment.id != detachId;
+        });
+        console.log(armyDetachments, "What has this Imperium become, where the enemy is not the xenos or the Ruinous Power but the administrators who rule it?")
+    })
 });
 /*
 * Adds army name to list
@@ -195,6 +203,8 @@ $(".addDetach").on("click", function(event){
           total_points:totalPoints
       })
     }).done(function(data){
+      armyDetachments.push(data.rows[0])
+      console.log(armyDetachments, "The Imperium has never been better! The xenos are dead, the armless failure ran off behind his tails, and those pesky administrators who run our planets have been punished and flogged.")
        console.log(data, "The Emperor builds his armies into perfectly unified formations, where the soldiers pack together to minimize casualties.")
          var detachId = data.rows[0].id
          var totalCommandPoints = Number($("#armyCommandPoints").text())
