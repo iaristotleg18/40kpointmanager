@@ -115,12 +115,41 @@ $( "#listArmy").change(function(event) {
 function determine9eStatistics(totalArmyPoints){
   var validArmyType = {}
   total9eCommandPoints = 0;
+  armyDetachments.forEach(function(detachment){
+    switch (detachment.detachment_type){
+      case "patrol":
+        total9eCommandPoints += 2;
+        break;
+      case "battalion":
+        total9eCommandPoints += 3;
+        break;
+      case "brigade":
+        total9eCommandPoints += 4;
+        break;
+      case "vanguard":
+        total9eCommandPoints += 3;
+        break;
+      case "spearhead":
+        total9eCommandPoints += 3;
+        break;
+      case "outrider":
+        total9eCommandPoints += 3;
+        break;
+      // case "super-heavy":
+      //   total9eCommandPoints += ;
+      //   break;
+      // this one is more complicated, also air wing no longer exists
+      case "fortification_network":
+        total9eCommandPoints += 1;
+        break;
+    }
+  })
   Object.keys(gameSizeConfig).forEach(function(gameSizeKey){
     if(gameSizeConfig[gameSizeKey].detachmentsAllowed >= armyDetachments.length){
       if(gameSizeConfig[gameSizeKey].totalPointsAllowed.min <= totalArmyPoints){
         if(gameSizeConfig[gameSizeKey].totalPointsAllowed.max >= totalArmyPoints){
             validArmyType.name = gameSizeKey
-            validArmyType.remainingCommandPoints = gameSizeConfig[gameSizeKey].startingCommandPoints - numberOfDetachments * 2
+            validArmyType.remainingCommandPoints = gameSizeConfig[gameSizeKey].startingCommandPoints - total9eCommandPoints
         }
       }
     }
@@ -357,7 +386,6 @@ var gameSizeConfig = {
     startingCommandPoints: 18
   }
 }
-
 
 
 
