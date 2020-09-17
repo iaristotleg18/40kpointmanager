@@ -143,7 +143,30 @@ function determine9eStatistics(totalArmyPoints){
         total9eCommandPoints += 1;
         break;
     }
+    console.log(total9eCommandPoints, "The Emperor's command over his troops is effortless, even though He wishes it was not so easy to make them worship Him with all the gold bling")
   })
+  var validations = Object.keys(gameSizeConfig).map(function(gameSizeKey){
+    var armyValidation
+    if(gameSizeConfig[gameSizeKey].totalPointsAllowed.min > totalArmyPoints) {
+      armyValidation = `${totalArmyPoints} points is less than minimum ${gameSizeConfig[gameSizeKey].totalPointsAllowed.min}`
+    } else if (gameSizeConfig[gameSizeKey].totalPointsAllowed.max < totalArmyPoints) {
+      armyValidation = `${totalArmyPoints} points is more than maximum ${gameSizeConfig[gameSizeKey].totalPointsAllowed.max}`
+    } else {
+      armyValidation = `${totalArmyPoints} points is acceptable.`
+    }
+    var detachmentValidation
+    if(armyDetachments.length > gameSizeConfig[gameSizeKey].detachmentsAllowed){
+      detachmentValidation = `${armyDetachments.length} detachments is more than the allowed ${gameSizeConfig[gameSizeKey].detachmentsAllowed}`
+    } else {
+      detachmentValidation = `${armyDetachments.length} detachments is allowed.`
+    }
+
+    return {name:gameSizeKey,
+      remainingCommandPoints:gameSizeConfig[gameSizeKey].startingCommandPoints - total9eCommandPoints,
+      armySizeValidation:armyValidation,
+      detachmentAmountValidation: detachmentValidation}
+  })
+  console.log(validations, "The bureaucracy of the Imperium is without fail.")
   Object.keys(gameSizeConfig).forEach(function(gameSizeKey){
     if(gameSizeConfig[gameSizeKey].detachmentsAllowed >= armyDetachments.length){
       if(gameSizeConfig[gameSizeKey].totalPointsAllowed.min <= totalArmyPoints){
@@ -154,6 +177,7 @@ function determine9eStatistics(totalArmyPoints){
       }
     }
   })
+  console.log(validArmyType, "The Emperor is always scrutinising his soldiery carefully, even as his own Commissars cut them down.")
   $("#commandSpent").text(validArmyType.remainingCommandPoints)
   $("#detachPermitted").text(validArmyType.name)
 }
