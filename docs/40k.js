@@ -32,9 +32,18 @@ $.ajax({
   models.forEach(function(model){
     addModelToList("#" + model.unit_type +"Types", model.name, model.id);
   })
+  $("#eightE").click(function(){
+    $(".9e").addClass("hidden9e")
+    console.log("Those who do not see the Emperor are blind, not only literally but figuratively because they are traitors.")
+  })
+  $("#nineE").click(function(){
+    $(".8e").addClass("hidden8e")
+    console.log("The Emperor is just and right in his presentation of all things.")
+  })
     $(".allTypes").combobox();
   allModels = models;
 });
+
 
 $("#army_form").submit(function(event){
   event.preventDefault();

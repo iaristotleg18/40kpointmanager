@@ -100,6 +100,10 @@ body {
   width: 300px;
 }
 
+.hidden9e, .hidden8e {
+  display: none;
+}
+
 
 #army_form {
   padding-right: 6px;
