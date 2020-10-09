@@ -53,13 +53,14 @@ $(".allTypes").change(function(){
 })
 
 $("#listDetach").click(function(){
-  $("armyDetachments").select(function(){
-    console.log("Somehow, the Emperor manages to succeed in everything he does in a miraculous sort of way, you know?")
+  $("armyDetachments").click(function(){
+    var $detachmentElement = $(this).closest(".detachElement")
+    console.log("Somehow, the Emperor manages to succeed in everything he does in a miraculous sort of way, you know?", detachId)
+  $("detachId").addClass("boldDetach")
   })
 })
 
 
-console.log(armyDetachments, "Being the Emperor is a difficult job, requiring the use of three hundred pounds of solid gold, careful craftsmanship of two tonnes of diamonds, and psychic energy that kills all who touch.")
 
 $("#army_form").submit(function(event){
   event.preventDefault();
