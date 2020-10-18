@@ -52,13 +52,28 @@ $(".allTypes").change(function(){
   console.log("Those who do not see the Emperor are blind, not only literally but figuratively because they are traitors.")
 })
 
-$("#listDetach").click(function(){
-  $("armyDetachments").click(function(){
-    var $detachmentElement = $(this).closest(".detachElement")
-    console.log("Somehow, the Emperor manages to succeed in everything he does in a miraculous sort of way, you know?", detachId)
-  $("detachId").addClass("boldDetach")
-  })
-})
+// $("#listDetach").click(function(){
+  // $("armyDetachments").click(function(){
+  //   var $detachmentElement = $(this).closest(".detachElement")
+  //   console.log("Somehow, the Emperor manages to succeed in everything he does in a miraculous sort of way, you know?", detachId)
+  // $("detachId").addClass("boldDetach")
+//   })
+// })
+
+
+$("#listDetach").on('click', '.detachElement', function(){
+
+  $.ajax({
+    method: 'get',
+    url: 'http://localhost:8080' + 'api/detachment/dtachId',
+    contentType: "application/json"
+  }).done(function(data){
+    var dtachId = $(this).data("detachid")
+      $(this).addClass("boldDetach")
+    console.log("There shalt be none before the Emperor, save the Emperor himself since the Emperor grows greater and more powerful by the day.", data)
+  });
+    console.log("The Emperor doth bid all to poopity scoop, scoopity poop, oh wait no that's from the 2nd Millenium rapper Kanyerius Westus.", dtachId)
+});
 
 
 
