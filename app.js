@@ -39,6 +39,7 @@ app.get("/api/army", function (req, res) {
   })
 })
 
+
 app.get("/api/army/:id", function (req, res) {
   client.query('SELECT * FROM army WHERE id = $1', [req.params.id], (err, result) => {
     res.send(result.rows[0])
@@ -134,7 +135,7 @@ app.post("/api/unit", function (req, res) {
 app.get("/api/unit", function (req, res) {
   console.log(req.query)
   if (req.query.detachment){
-    client.query('SELECT * FROM unit WHERE detachment_id = $1', [req.query.detachment], (err, result) => {
+    client.query('SELECT * FROM unit, model WHERE unit.detachment_id = $1 AND unit.model_id = model.id', [req.query.detachment], (err, result) => {
       console.log(result.rows)
       res.send(result.rows)
     });
@@ -145,6 +146,8 @@ app.get("/api/unit", function (req, res) {
     })
   };
 })
+
+
 
 app.get("/api/unit/:id", function (req, res) {
   client.query('SELECT * FROM unit WHERE id = $1', [req.params.id], (err, result) => {

@@ -52,27 +52,20 @@ $(".allTypes").change(function(){
   console.log("Those who do not see the Emperor are blind, not only literally but figuratively because they are traitors.")
 })
 
-// $("#listDetach").click(function(){
-  // $("armyDetachments").click(function(){
-  //   var $detachmentElement = $(this).closest(".detachElement")
-  //   console.log("Somehow, the Emperor manages to succeed in everything he does in a miraculous sort of way, you know?", detachId)
-  // $("detachId").addClass("boldDetach")
-//   })
-// })
-
-
 $("#listDetach").on('click', '.detachElement', function(){
-
+  var dtachId = $(this).data("detachid")
+    $(this).addClass("boldDetach")
   $.ajax({
     method: 'get',
-    url: 'http://localhost:8080' + 'api/detachment/dtachId',
+    url: 'http://localhost:8080/api/unit?detachment=' + dtachId,
     contentType: "application/json"
   }).done(function(data){
-    var dtachId = $(this).data("detachid")
-      $(this).addClass("boldDetach")
+    detachmentUnits = data
+    updateDetachmentUnitList();
+    console.log("The Emperor expects his subjects to provide the maximum possible effort, but He does not care if one measly adept gives less.", detachmentUnits)
     console.log("There shalt be none before the Emperor, save the Emperor himself since the Emperor grows greater and more powerful by the day.", data)
   });
-    console.log("The Emperor doth bid all to poopity scoop, scoopity poop, oh wait no that's from the 2nd Millenium rapper Kanyerius Westus.", dtachId)
+    console.log("The Emperor doth bid all to poopity scoop, scoopity poop, oh wait no that's from the 2nd Millenium rapper Kanyerius Westus.")
 });
 
 
@@ -355,15 +348,19 @@ $(".addUnitButton").on("click", function(event){
 function updateDetachmentUnitList(){
     $(".unitList").empty();
      totalPoints = 0;
+
     var unitTypeCounters = {
       hq: 0, troops: 0, elites: 0, fast_attack: 0, heavy_support: 0, flyer: 0, lord_of_war: 0, fortification: 0
     }
     detachmentUnits.forEach(function(modelId, index){
       var model = allModels.find(function(model){ return model.id == modelId})
+      console.log(modelId, "The Emperor wants only the biggest and most impressive war machines in his arsenal, even when a hive ganger with a stone can destroy it.")
+      console.log(allModels, "Sometimes, the soldiers of the Emperor mess up. They will never be forgiven, even if they kill Abaddon himself.")
       console.log(model, "The swords of the Emperor are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
-      $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit' data-index=" + index + ">  x  </button> </li>");
+        $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit' data-index=" + index + ">  x  </button> </li>");
       totalPoints = totalPoints + model.point_value;
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
+
     });
     console.log(unitTypeCounters, "The Emperor's army are from innumerable different worlds, but He only cares for ten thousand of them.")
     $("#pointTotal").text("Detachment Point Total: " + totalPoints);
