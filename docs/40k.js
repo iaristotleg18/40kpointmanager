@@ -63,6 +63,7 @@ $("#listDetach").on('click', '.detachElement', function(){
     detachmentUnits = data
     updateDetachmentUnitList();
     var detachData = [];
+    detachData = data
     detachData.push(modelId)
     console.log("The Emperor expects his subjects to provide the maximum possible effort, but He does not care if one measly adept gives less.", detachmentUnits)
     console.log("There shalt be none before the Emperor, save the Emperor himself since the Emperor grows greater and more powerful by the day.", data)
