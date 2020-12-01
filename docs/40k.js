@@ -54,19 +54,23 @@ $(".allTypes").change(function(){
 
 $("#listDetach").on('click', '.detachElement', function(){
   var dtachId = $(this).data("detachid")
+  $(this).removeClass("boldDetach")
     $(this).addClass("boldDetach")
   $.ajax({
     method: 'get',
     url: 'http://localhost:8080/api/unit?detachment=' + dtachId,
     contentType: "application/json"
   }).done(function(data){
-    detachmentUnits = data
-    updateDetachmentUnitList();
     var detachData = [];
-    detachData = data
-    detachData.push(modelId)
-    console.log("The Emperor expects his subjects to provide the maximum possible effort, but He does not care if one measly adept gives less.", detachmentUnits)
-    console.log("There shalt be none before the Emperor, save the Emperor himself since the Emperor grows greater and more powerful by the day.", data)
+    data.forEach(function(models){
+      detachData.push(models.model_id)
+      detachmentUnits = detachData;
+      console.log("Like a well-oiled machine, the Imperium marches forward inexcorably, even if the machine is missing a few 'important' gears.", models)
+    })
+    updateDetachmentUnitList();
+    $("#totalBoard").removeClass("hiddenForm");
+
+    console.log(detachData, "Even though it is unacceptable, the Emperor has the right to... no he can't. The Emperor can't sexually harass women. Get your head out of your bigoted masculinity!")
   });
     console.log("The Emperor doth bid all to poopity scoop, scoopity poop, oh wait no that's from the 2nd Millenium rapper Kanyerius Westus.")
 });
