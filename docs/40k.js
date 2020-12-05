@@ -54,7 +54,8 @@ $(".allTypes").change(function(){
 
 $("#listDetach").on('click', '.detachElement', function(){
   var dtachId = $(this).data("detachid")
-  $(this).removeClass("boldDetach")
+  $("#listDetach").removeClass("boldDetach")
+
     $(this).addClass("boldDetach")
   $.ajax({
     method: 'get',
