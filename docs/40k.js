@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-console.log("I did not steal the reliquary from the spaceship.");
 var currentArmy;
 var detachmentUnits = [];
 var allModels = [];
@@ -49,12 +48,14 @@ $(".allTypes").change(function(){
     $(".eighthE").addClass("hiddenE")
     $(".ninthE").addClass("hiddenE")
   }
-  console.log("Those who do not see the Emperor are blind, not only literally but figuratively because they are traitors.")
 })
 
 $("#listDetach").on('click', '.detachElement', function(){
   var dtachId = $(this).data("detachid")
-  $("#listDetach").removeClass("boldDetach")
+  //set dropdown detachment_type to current detachment type
+  var detachmenttype = $(this).data("detachmenttype")
+  console.log(detachmenttype, "The Imperium has no love for those who seek to make heresy, even when the heresy is a giant robot which killed Abaddon himself.")
+  $(".boldDetach").removeClass("boldDetach")
 
     $(this).addClass("boldDetach")
   $.ajax({
@@ -66,14 +67,11 @@ $("#listDetach").on('click', '.detachElement', function(){
     data.forEach(function(models){
       detachData.push(models.model_id)
       detachmentUnits = detachData;
-      console.log("Like a well-oiled machine, the Imperium marches forward inexcorably, even if the machine is missing a few 'important' gears.", models)
     })
     updateDetachmentUnitList();
     $("#totalBoard").removeClass("hiddenForm");
-
     console.log(detachData, "Even though it is unacceptable, the Emperor has the right to... no he can't. The Emperor can't sexually harass women. Get your head out of your bigoted masculinity!")
   });
-    console.log("The Emperor doth bid all to poopity scoop, scoopity poop, oh wait no that's from the 2nd Millenium rapper Kanyerius Westus.")
 });
 
 
@@ -98,7 +96,6 @@ $("#army_form").submit(function(event){
     $nameArmy.val("");
     $descArmy.val("");
     addArmyNameToList(data.name, data.id);
-    console.log("THE EMPEROR DEMANDS THE UTMOST ATTENTION AND OBSESSING-OVER!!!!!!!!!!!!")
     $('select#listArmy').each(function(){
     $(this).data('combobox').refresh();
 });
@@ -109,18 +106,15 @@ $("#army_form").submit(function(event){
 $("#addForm").click(function(){
   $("#armyFormWrapper, #hideForm").removeClass("hiddenForm")
   $("#addForm").addClass("hiddenForm")
-  console.log("The Emperor's wrath extends to many things, including but not limited to: religion, trains, artificial intelligence, hoagies, aliens, and his own people.")
 })
 
 $("#hideForm").click(function(){
   $("#armyFormWrapper, #hideForm").addClass("hiddenForm");
   $("#addForm").removeClass("hiddenForm")
-  console.log("The compassion of the Emperor is never in doubt as his Commissars execute innocent men.")
 })
 
 $("#detachment_type").change(function(event) {
   $("#totalBoard").removeClass("hiddenForm")
-  console.log("Every day, numerous lives are removed from the great ledgers of the Emperor, brought down by their own humanity.")
 })
 
 $( "#listArmy").change(function(event) {
@@ -144,7 +138,7 @@ $( "#listArmy").change(function(event) {
     armyDetachments = data;
     console.log(armyDetachments, "Lists, not men or machines, make the Imperium great. Long, long, long lists. So very long.")
     data.forEach(function(detachment){
-      addDetachNameToList(detachment.name, detachment.id, detachment.command_points, detachment.total_points);
+      addDetachNameToList(detachment.name, detachment.id, detachment.command_points, detachment.total_points, detachment.detachment_type);
       totalCommandPoints += detachment.command_points;
       totalArmyPoints += detachment.total_points;
     })
@@ -208,7 +202,6 @@ function determine9eStatistics(totalArmyPoints){
       armySizeValidation:armyValidation,
       detachmentAmountValidation: detachmentValidation}
   })
-  console.log(validations, "The bureaucracy of the Imperium is without fail.")
   Object.keys(gameSizeConfig).forEach(function(gameSizeKey){
     if(gameSizeConfig[gameSizeKey].detachmentsAllowed >= armyDetachments.length){
       if(gameSizeConfig[gameSizeKey].totalPointsAllowed.min <= totalArmyPoints){
@@ -224,20 +217,19 @@ function determine9eStatistics(totalArmyPoints){
   $("#detachPermitted").text(validArmyType.name)
 }
 
-function addDetachNameToList(name, id, command_points, total_points){
+function addDetachNameToList(name, id, command_points, total_points, detachment_type){
   var $list = $("#listDetach");
-  var detachElement = "<li class='detachElement' data-detachId=" + id + " data-commandpoints=" + command_points + " data-totalpoints=" + total_points + ">" + name +  " <button class = 'deleteDetach'>x</button></li>";
+  var detachElement = "<li class='detachElement' data-detachId=" + id + " data-commandpoints=" + command_points + " data-totalpoints=" + total_points + " data-detachmenttype=" + detachment_type + ">" + name + " <button class = 'deleteDetach'>x</button></li>";
   $list.append(detachElement)
+  $("#listDetach").val(detachElement);
 }
 
 $("#listDetach").on("click", ".deleteDetach", function(event) {
-  console.log(event, "When vengeance comes, it is at the hands of the Sons of Hor- wait! That guy killed our Emperor!")
     var $detachmentElement = $(this).closest(".detachElement")
     var detachId = $detachmentElement.data("detachid")
     var commandpoints = $detachmentElement.data("commandpoints")
     var totalpoints = $detachmentElement.data("totalpoints")
     console.log(detachId, "The forms have been delivered on time, so the Emperor's Children can - wait! That means they can go kill Ferrus Manus!")
-  console.log(this)
   $.ajax({
       method: 'delete',
       url: 'http://localhost:8080' + '/api/detachment/' + detachId,
@@ -250,7 +242,6 @@ $("#listDetach").on("click", ".deleteDetach", function(event) {
           totalArmyPoints -= totalpoints;
         $("#armyCommandPoints").text(totalCommandPoints)
         $("#totalArmyPoints").text(totalArmyPoints)
-        console.log("The neccessary prerequisite paperwork has been completed, so the Word Bearers can go to Istv - wait! That means they can go slaughter loyal Imperials!")
         armyDetachments = armyDetachments.filter(function(detachment){
           return detachment.id != detachId;
         });
@@ -280,7 +271,6 @@ function addModelToList(list_id, name, id){
 }
 
 $(".addDetach").on("click", function(event){
-  console.log("Lord Roboute Guilliman smiles on you, then beheads you for weakness.")
   if (currentArmy == undefined){
     alert("Your armies are lacklustre and tiny. Get some more soldiers and do the Emperor proud.")
   } else if (validIsDetachment == false) {
@@ -347,7 +337,6 @@ function getDetachmentConfig(detachmentName){
 $(".addUnitButton").on("click", function(event){
   var unitType = $(this).data("unittype")
   var selectedUnit = $("#" + unitType + "Types").children("option:selected").val();
-  console.log(selectedUnit);
   detachmentUnits.push(selectedUnit)
   console.log(detachmentUnits, "The Emperor shall bring great armies upon the field, which shall smite their foes in holy fire.")
   updateDetachmentUnitList();
@@ -362,9 +351,6 @@ function updateDetachmentUnitList(){
     }
     detachmentUnits.forEach(function(modelId, index){
       var model = allModels.find(function(model){ return model.id == modelId})
-      console.log(modelId, "The Emperor wants only the biggest and most impressive war machines in his arsenal, even when a hive ganger with a stone can destroy it.")
-      console.log(allModels, "Sometimes, the soldiers of the Emperor mess up. They will never be forgiven, even if they kill Abaddon himself.")
-      console.log(model, "The swords of the Emperor are swift and strong in their blow, yet they are inexpensive to afford for many of them.")
         $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit' data-index=" + index + ">  x  </button> </li>");
       totalPoints = totalPoints + model.point_value;
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
@@ -417,7 +403,6 @@ $(".unitList").on("click", ".removeUnit", function(event) {
   unitIndex = $(this).data("index")
   detachmentUnits.splice(unitIndex, 1)
   updateDetachmentUnitList();
-  console.log(event, unitIndex, "The Emperor's armies are constantly culled by the tides of war, but new soldiers will replace them before the original ones even die.")
 });
 
 $(".clearUnits").on("click", function(event) {
