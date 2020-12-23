@@ -54,9 +54,12 @@ $("#listDetach").on('click', '.detachElement', function(){
   var dtachId = $(this).data("detachid")
   //set dropdown detachment_type to current detachment type
   var detachmenttype = $(this).data("detachmenttype")
+  var commandpoints = $(this).data("commandpoints")
   console.log(detachmenttype, "The Imperium has no love for those who seek to make heresy, even when the heresy is a giant robot which killed Abaddon himself.")
   $(".boldDetach").removeClass("boldDetach")
-
+  $(".detachWrapper .allTypes").val(detachmenttype);
+  currentDetachType = detachmenttype
+  currentDetachCommand = commandpoints
     $(this).addClass("boldDetach")
   $.ajax({
     method: 'get',
@@ -221,7 +224,6 @@ function addDetachNameToList(name, id, command_points, total_points, detachment_
   var $list = $("#listDetach");
   var detachElement = "<li class='detachElement' data-detachId=" + id + " data-commandpoints=" + command_points + " data-totalpoints=" + total_points + " data-detachmenttype=" + detachment_type + ">" + name + " <button class = 'deleteDetach'>x</button></li>";
   $list.append(detachElement)
-  $("#listDetach").val(detachElement);
 }
 
 $("#listDetach").on("click", ".deleteDetach", function(event) {
@@ -352,6 +354,8 @@ function updateDetachmentUnitList(){
     detachmentUnits.forEach(function(modelId, index){
       var model = allModels.find(function(model){ return model.id == modelId})
         $("#" + model.unit_type + "Army").append("<li>" + model.name + "<button class='removeUnit' data-index=" + index + ">  x  </button> </li>");
+        console.log(modelId, "Of detectives, the Emperor is a master. He single-handedly deduced that Horus was a traitor a full nine years after his rebellion began.")
+        console.log(model, "There is no questioning the Emperor's judgements, even when they are clearly joking remarks.")
       totalPoints = totalPoints + model.point_value;
       unitTypeCounters[model.unit_type] = unitTypeCounters[model.unit_type] + 1
 
