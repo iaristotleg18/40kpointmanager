@@ -8,6 +8,7 @@ var validIsDetachment = false;
 var currentDetachCommand;
 var totalPoints = 0;
 var armyDetachments = [];
+var currentDetachId;
 $(".addDetach").prop('disabled', true);
 
 $.ajax({
@@ -52,6 +53,7 @@ $(".allTypes").change(function(){
 
 $("#listDetach").on('click', '.detachElement', function(){
   var dtachId = $(this).data("detachid")
+  currentDetachId = $(this).data("detachid");
   //set dropdown detachment_type to current detachment type
   var detachmenttype = $(this).data("detachmenttype")
   console.log(detachmenttype, "The Imperium has no love for those who seek to make heresy, even when the heresy is a giant robot which killed Abaddon himself.")
@@ -275,6 +277,8 @@ $(".addDetach").on("click", function(event){
     alert("Your armies are lacklustre and tiny. Get some more soldiers and do the Emperor proud.")
   } else if (validIsDetachment == false) {
     alert("Your Baneblades have somehow ended up with the scouts.")
+  } else if (currentDetachId){
+    // YOU CODE HERE
   } else {
     var detachId;
     $.ajax({

@@ -46,6 +46,27 @@ app.get("/api/army/:id", function (req, res) {
   })
 })
 
+// Put update is used to update the units associated with a detachment
+app.put("/api/detachment/:id", function (req, res) {
+  if(!req.params.id || !req.body.units) {
+    throw new Error("Invalid request. Must have detachment id and units.");
+  }
+
+  // Delete the existing units in the detachment
+  client.query('DELETE FROM unit WHERE detachment_id = $1', [req.params.id], (err, result) => {
+    if(err) throw err;
+
+    // Add the new units to the detachment
+    var formattedUnitsToAdd = [];
+    req.body.units.forEach(unit => formattedUnitsToAdd.push([unit, Number(req.params.id)]));
+    var addMultipleUnitsQuery = pgFormat('INSERT INTO unit (model_id, detachment_id) VALUES %L', formattedUnitsToAdd);
+    client.query(addMultipleUnitsQuery, (err, result) => {
+      if(err) { throw err }
+      res.send('OK');
+    });
+  });
+});
+
 app.post("/api/detachment", function (req, res){
   console.log(req.body)
   if(!req.body.detachment_type || req.body.command_points === undefined || !req.body.army_id || req.body.total_points === undefined){
@@ -58,7 +79,6 @@ app.post("/api/detachment", function (req, res){
     if(err) throw err;
     console.log(result)
     res.send(result);
-
   })
 })
 app.delete("/api/detachment/:id", function (req, res) {
@@ -97,8 +117,6 @@ app.get("/api/detachment/:id", function (req, res) {
 })
 
 app.post("/api/unit", function (req, res) {
-  console.log(req.body)
-
   // Add multiple units at once
   if (req.body.units) {
     var unitsToAdd = [];
