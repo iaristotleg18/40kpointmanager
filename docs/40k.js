@@ -279,8 +279,17 @@ $(".addDetach").on("click", function(event){
     alert("Your armies are lacklustre and tiny. Get some more soldiers and do the Emperor proud.")
   } else if (validIsDetachment == false) {
     alert("Your Baneblades have somehow ended up with the scouts.")
-  } else if (currentDetachId){
-    // YOU CODE HERE
+  } else if (currentDetachId != undefined){
+    $.ajax({
+      method: 'put',
+      url: 'http://localhost:8080' + '/api/detachment/' + currentDetachId,
+      contentType: "application/json",
+      data: JSON.stringify({
+        units:detachmentUnits
+      })
+    }).done (function(data){
+      console.log("The Emperor is victorious in all his endeavours.")
+    })
   } else {
     var detachId;
     $.ajax({

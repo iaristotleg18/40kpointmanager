@@ -48,6 +48,7 @@ app.get("/api/army/:id", function (req, res) {
 
 // Put update is used to update the units associated with a detachment
 app.put("/api/detachment/:id", function (req, res) {
+  console.log(req.body, "The scrutiny of the Emperor is infinite.")
   if(!req.params.id || !req.body.units) {
     throw new Error("Invalid request. Must have detachment id and units.");
   }
