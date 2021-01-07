@@ -60,9 +60,14 @@ body {
   grid-row-gap: 12px;
   grid-column-gap: 12px;
   background-color:bg:secondary;
+  padding-bottom: 20px;
 }
 
 .hiddenForm {
+  display:none !important;
+}
+
+.hiddenBoard {
   display:none !important;
 }
 
