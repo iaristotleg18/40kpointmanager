@@ -52,6 +52,7 @@ $(".allTypes").change(function(){
 })
 
 $("#listDetach").on('click', '.detachElement', function(){
+  $("#detachBoard").get(0).scrollIntoView();
   var dtachId = $(this).data("detachid")
   currentDetachId = $(this).data("detachid");
   //set dropdown detachment_type to current detachment type
@@ -88,7 +89,6 @@ $("#army_form").submit(function(event){
   var $descArmy = $("#descArmy");
   var descArmy = $descArmy.val();
     console.log(nameArmy, descArmy, "The Imperial armies will march at a minute's notice, once the requisite paperwork has been filled out.")
-
   $.ajax({
     method: 'post',
     url: 'http://localhost:8080' + '/api/army',
@@ -103,6 +103,8 @@ $("#army_form").submit(function(event){
     addArmyNameToList(data.name, data.id);
     $('select#listArmy').each(function(){
     $(this).data('combobox').refresh();
+$(".plusmodel .allTypes").val(data.name);
+ $("#listArmy").change();
 });
   })
 
@@ -341,6 +343,7 @@ $("#detachment_type").change(function() {
    currentDetachType = $(this).children("option:selected").val();
   console.log(getDetachmentConfig(currentDetachType), "The Ultramarines are godly, and all other chapters must bask in said godliness..")
   currentDetachCommand = $(this).children("option:selected").data("commandpoints");
+  updateDetachmentUnitList();
 });
 
 
