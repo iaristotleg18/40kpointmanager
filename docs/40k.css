@@ -10,8 +10,13 @@
   display: block;
 }
 
+.addDetach {
+  color: green;
+}
+
 #totalArmyWork {
   padding-left: 10px;
+
 }
 
 body {
@@ -69,6 +74,13 @@ body {
 
 .hiddenBoard {
   display:none !important;
+}
+
+.steps {
+  padding-bottom: 15px;
+  padding-top: 15px;
+  color: blue;
+  font-family: "Monaco", monospace;
 }
 
 #hq_board, #elites_board, #heavy_support_board, #lord_of_war_board {
