@@ -102,11 +102,13 @@ $("#army_form").submit(function(event){
     $descArmy.val("");
     addArmyNameToList(data.name, data.id);
     $('select#listArmy').each(function(){
-    $(this).data('combobox').refresh();
-$(".plusmodel .allTypes").val(data.name);
- $("#listArmy").change();
-});
-  })
+      $(this).data('combobox').refresh();
+      $("#armySelect .allTypes").val(data.name);
+      $("select#listArmy").val(data.id);
+    });
+    currentArmy = data.name;
+    $("#listArmy").trigger('change');
+  });
 
 });
 
