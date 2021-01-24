@@ -16,7 +16,34 @@
 
 #totalArmyWork {
   padding-left: 10px;
+}
 
+
+.abutton {
+  margin-left: 7.5294857302838503827px;
+  border-radius: 7.5px
+}
+
+.deleteDetach, .removeUnit {
+  border-radius: 7.5px;
+  margin-left: 3.42912840582949583028469px;
+}
+
+.detachElement {
+  margin-top: 6.385830284958384048px;
+}
+
+.removeUnit {
+  margin-top: 2px
+}
+
+.clearUnits {
+  margin-top: 5px;
+  border-radius: 7.5px;
+}
+
+.addUnitButton {
+  margin-left: 1px;
 }
 
 body {

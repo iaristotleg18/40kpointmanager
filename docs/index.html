@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE hml>
 
 <html>
 <head>
@@ -38,8 +38,8 @@
 <div class="plusmodel" id="armySelect">
 <select id="listArmy" class="allTypes">
   <option></option>
-</select><button type="button" id="addForm" class="bbutton">Add Army</button>
-<button type="button" id="hideForm" class="bbutton hiddenForm">Cancel</button>
+</select><button type="button" id="addForm" class="bbutton abutton">Add Army</button>
+<button type="button" id="hideForm" class="bbutton abutton hiddenForm">Cancel</button>
 </div>
 
 <div id = "totalArmyWork">
@@ -65,9 +65,9 @@
 
   <div class="ninthE">
     <div id="detachHere"></div>
-    <div>Army Type: <span id="detachPermitted"></span></div>
+    <div>Army Type: <span id="detachPermitted">Undetermined battle size</span></div>
     <div id="pointsHere"></div>
-    <div>Command Points Remaining: <span id="commandSpent"></span></div>
+    <div>Command Points Remaining: <span id="commandSpent">0</span></div>
   </div>
   </div>
 
@@ -87,7 +87,7 @@
   <option value="fortification_network" data-commandpoints='1'>Fortification Detachment</option>
 
 </select>
-<button class="addDetach">Save Detachment</button>
+<button class="addDetach abutton">Save Detachment</button>
 </div>
 
 <button type="button" class="clearUnits">Clear Units</button>
@@ -104,7 +104,7 @@
           <select id ="hqTypes" class="allTypes">
             <option value="" disabled selected>Select your HQ unit!</option>
           </select>
-            <span class="bbutton"><button class="addUnitButton" id="hqAdd" data-unittype="hq">+</button></span>
+            <span class="bbutton"><button class="addUnitButton abutton" id="hqAdd" data-unittype="hq">+</button></span>
         </div>
         <span class="armyTitle">HQ Units</span>
 
@@ -116,7 +116,7 @@
         <select id ="troopsTypes" class="allTypes">
           <option value="" disabled selected>Select your troops unit!</option>
         </select>
-    <span class="bbutton"><button class="addUnitButton" id="troopsAdd" data-unittype="troops">+</button></span>
+    <span class="bbutton"><button class="addUnitButton abutton" id="troopsAdd" data-unittype="troops">+</button></span>
       </div>
       <span class="armyTitle">Troops Units</span>
 
@@ -128,7 +128,7 @@
         <select id ="elitesTypes" class="allTypes">
           <option value="" disabled selected>Select your elites unit!</option>
         </select>
-            <span class="bbutton"><button class="addUnitButton" id="elitesAdd" data-unittype="elites">+</button></span>
+            <span class="bbutton"><button class="addUnitButton abutton" id="elitesAdd" data-unittype="elites">+</button></span>
       </div>
       <span class="armyTitle">Elites Units</span>
 
@@ -141,7 +141,7 @@
         <select id ="fast_attackTypes" class="allTypes">
           <option value="" disabled selected>Select your fast attack unit!</option>
         </select>
-          <span class="bbutton"><button class="addUnitButton" id="fastAttackAdd" data-unittype="fast_attack">+</button></span>
+          <span class="bbutton"><button class="addUnitButton abutton" id="fastAttackAdd" data-unittype="fast_attack">+</button></span>
       </div>
       <span class="armyTitle">Fast Attack Units</span>
 
@@ -154,7 +154,7 @@
         <select id ="heavy_supportTypes" class="allTypes">
           <option value="" disabled selected>Select your heavy support unit!</option>
         </select>
-          <span class="bbutton"><button class="addUnitButton" id="heavySupportAdd" data-unittype="heavy_support">+</button></span>
+          <span class="bbutton"><button class="addUnitButton abutton" id="heavySupportAdd" data-unittype="heavy_support">+</button></span>
       </div>
       <span class="armyTitle">Heavy Support Units</span>
 
@@ -167,7 +167,7 @@
         <select id ="flyerTypes" class="allTypes">
           <option value="" disabled selected>Select your flyer unit!</option>
         </select>
-        <span class="bbutton"><button class="addUnitButton" id="flyerAdd" data-unittype="flyer">+</button></span>
+        <span class="bbutton"><button class="addUnitButton abutton" id="flyerAdd" data-unittype="flyer">+</button></span>
       </div>
       <span class="armyTitle">Flyer Units</span>
 
@@ -179,7 +179,7 @@
         <select id ="lord_of_warTypes" class="allTypes">
           <option value="" disabled selected>Select your lord of war unit!</option>
         </select>
-          <span class="bbutton"><button class="addUnitButton" id="lordOfWarAdd" data-unittype="lord_of_war">+</button></span>
+          <span class="bbutton"><button class="addUnitButton abutton" id="lordOfWarAdd" data-unittype="lord_of_war">+</button></span>
       </div>
       <span class="armyTitle">Lord Of War Units</span>
         <div class = "detachMessage"></div>
@@ -190,7 +190,7 @@
         <select id ="fortificationTypes" class="allTypes">
           <option value="" disabled selected>Select your fortification unit!</option>
         </select>
-          <span class="bbutton"><button class="addUnitButton" id="fortificationAdd" data-unittype="fortification">+</button></span>
+          <span class="bbutton"><button class="addUnitButton abutton" id="fortificationAdd" data-unittype="fortification">+</button></span>
       </div>
       <span class="armyTitle">Fortification Units</span>
         <div class = "detachMessage"></div>

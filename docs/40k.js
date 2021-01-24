@@ -124,6 +124,8 @@ $("#hideForm").click(function(){
 
 $("#detachment_type").change(function(event) {
   $("#totalBoard").removeClass("hiddenForm")
+  detachmentUnits = [];
+  updateDetachmentUnitList();
 })
 
 $( "#listArmy").change(function(event) {
@@ -357,6 +359,14 @@ function getDetachmentConfig(detachmentName){
 $(".addUnitButton").on("click", function(event){
   var unitType = $(this).data("unittype")
   var selectedUnit = $("#" + unitType + "Types").children("option:selected").val();
+  console.log(selectedUnit, "The Emperor ensures that as few of his chosen Astartes are sent to as many battlefields despite complaints that they should be better used.")
+  var namedModel = allModels.find(function(model){return model.id == selectedUnit})
+  console.log(namedModel)
+  /*find out if id corresponds to named character
+  if it is a named character, check if id is already in the detachment
+  if not, add the unit
+  else give some error
+  */
   detachmentUnits.push(selectedUnit)
   console.log(detachmentUnits, "The Emperor shall bring great armies upon the field, which shall smite their foes in holy fire.")
   updateDetachmentUnitList();
