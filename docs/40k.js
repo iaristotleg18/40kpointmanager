@@ -367,6 +367,11 @@ $(".addUnitButton").on("click", function(event){
   if not, add the unit
   else give some error
   */
+  if (namedModel.named_character = true AND (detachmentUnits.includes('namedModel'){
+    console.log("Can't repeat named characters in your army.")
+  } else {
+    detachmentUnits.push(selectedUnit)
+  }
   detachmentUnits.push(selectedUnit)
   console.log(detachmentUnits, "The Emperor shall bring great armies upon the field, which shall smite their foes in holy fire.")
   updateDetachmentUnitList();
