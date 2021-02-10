@@ -13,7 +13,7 @@ $(".addDetach").prop('disabled', true);
 
 $.ajax({
     method: 'get',
-    url: 'http://localhost:8080' + '/api/army',
+    url: 'https://warhammer-points.herokuapp.com' + '/api/army',
     contentType: "application/json"
   }).done(function(data){
     console.log(data)
@@ -25,7 +25,7 @@ $.ajax({
 
 $.ajax({
   method: 'get',
-  url: 'http://localhost:8080' + '/api/model',
+  url: 'https://warhammer-points.herokuapp.com' + '/api/model',
   contentType: "application/json"
 }).done(function(models) {
   console.log(models)
@@ -66,7 +66,7 @@ $("#listDetach").on('click', '.detachElement', function(){
     $(this).addClass("boldDetach")
   $.ajax({
     method: 'get',
-    url: 'http://localhost:8080/api/unit?detachment=' + dtachId,
+    url: 'https://warhammer-points.herokuapp.com/api/unit?detachment=' + dtachId,
     contentType: "application/json"
   }).done(function(data){
     var detachData = [];
@@ -91,7 +91,7 @@ $("#army_form").submit(function(event){
     console.log(nameArmy, descArmy, "The Imperial armies will march at a minute's notice, once the requisite paperwork has been filled out.")
   $.ajax({
     method: 'post',
-    url: 'http://localhost:8080' + '/api/army',
+    url: 'https://warhammer-points.herokuapp.com' + '/api/army',
     contentType: "application/json",
     data: JSON.stringify({
         name:nameArmy, description:descArmy
@@ -138,7 +138,7 @@ $( "#listArmy").change(function(event) {
   $(".detachment").addClass("addDetachB");
   $.ajax({
     method: 'get',
-    url: 'http://localhost:8080' + '/api/detachment',
+    url: 'https://warhammer-points.herokuapp.com' + '/api/detachment',
     contentType: "application/json",
     data: {army:currentArmy}
   }).done(function(data) {
@@ -242,7 +242,7 @@ $("#listDetach").on("click", ".deleteDetach", function(event) {
     console.log(detachId, "The forms have been delivered on time, so the Emperor's Children can - wait! That means they can go kill Ferrus Manus!")
   $.ajax({
       method: 'delete',
-      url: 'http://localhost:8080' + '/api/detachment/' + detachId,
+      url: 'https://warhammer-points.herokuapp.com' + '/api/detachment/' + detachId,
       contentType: "application/json",
     }).done(function(data){
         $detachmentElement.remove();
@@ -288,7 +288,7 @@ $(".addDetach").on("click", function(event){
   } else if (currentDetachId != undefined){
     $.ajax({
       method: 'put',
-      url: 'http://localhost:8080' + '/api/detachment/' + currentDetachId,
+      url: 'https://warhammer-points.herokuapp.com' + '/api/detachment/' + currentDetachId,
       contentType: "application/json",
       data: JSON.stringify({
         units:detachmentUnits
@@ -300,7 +300,7 @@ $(".addDetach").on("click", function(event){
     var detachId;
     $.ajax({
       method: 'post',
-      url: 'http://localhost:8080' + '/api/detachment',
+      url: 'https://warhammer-points.herokuapp.com' + '/api/detachment',
       contentType: "application/json",
       data: JSON.stringify({
           detachment_type:currentDetachType,
@@ -332,7 +332,7 @@ $(".addDetach").on("click", function(event){
          })
          $.ajax({
            method: 'post',
-           url: 'http://localhost:8080' + '/api/unit',
+           url: 'https://warhammer-points.herokuapp.com' + '/api/unit',
            contentType: "application/json",
            data: JSON.stringify({
                units:modelAdd,
