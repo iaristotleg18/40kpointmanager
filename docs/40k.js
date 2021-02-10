@@ -359,21 +359,18 @@ function getDetachmentConfig(detachmentName){
 $(".addUnitButton").on("click", function(event){
   var unitType = $(this).data("unittype")
   var selectedUnit = $("#" + unitType + "Types").children("option:selected").val();
-  console.log(selectedUnit, "The Emperor ensures that as few of his chosen Astartes are sent to as many battlefields despite complaints that they should be better used.")
   var namedModel = allModels.find(function(model){return model.id == selectedUnit})
-  console.log(namedModel)
   /*find out if id corresponds to named character
   if it is a named character, check if id is already in the detachment
   if not, add the unit
+  && detachmentUnits.includes(`${namedModel.id}`)
   else give some error
   */
-  if (namedModel.named_character = true AND (detachmentUnits.includes('namedModel'){
-    console.log("Can't repeat named characters in your army.")
+  if (namedModel.named_character == true && detachmentUnits.some(unit => Number(unit) == namedModel.id)){
+    alert("Can't repeat named characters in your army.")
   } else {
     detachmentUnits.push(selectedUnit)
-  }
-  detachmentUnits.push(selectedUnit)
-  console.log(detachmentUnits, "The Emperor shall bring great armies upon the field, which shall smite their foes in holy fire.")
+  };
   updateDetachmentUnitList();
 })
 
@@ -424,7 +421,6 @@ function updateDetachmentUnitList(){
             $("#" + unitValueTypes + "_board .detachMessage").text("Max: " + maxUnitsAllowed + ", Min: " + minUnitsAllowed + ", Current: " + totalUnitsPerType)
           }
         if (minUnitsAllowed == 0 || maxUnitsAllowed == 0){
-          console.log("The Emperor has no place for stragglers or randos in his indomitable and impenetrable legions.")
         }
     })
       if (validIsDetachment == true){
