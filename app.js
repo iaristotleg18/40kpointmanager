@@ -4,29 +4,31 @@ const pgFormat = require('pg-format');
 const { Client } = require('pg');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-      rejectUnauthorized: false
-    }});
+  ssl: { rejectUnauthorized: false }
+});
 
-
-client.connect();
+client.connect(err => {
+  if (err) {
+    console.error('connection error', err.stack)
+  } else {
+    console.log('connected to db')
+  }
+});
 
 const express = require('express')
 var bodyParser = require("body-parser");
 var cors = require('cors')
 const app = express()
 const port = process.env.PORT || 8080;
-app.use(cors())
+
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(express.static('docs'))
+app.use(express.static('docs'));
 
 app.post("/api/army", function (req, res){
-  console.log('======= ARMY POST REQUEST =======');
-  console.log(req)
   client.query('INSERT INTO army(name, description) VALUES($1, $2) RETURNING *', [req.body.name, req.body.description], (err, result) => {
     if(err) throw err;
-    console.log(result)
     res.send(result.rows[0]);
     res.status(201).end();
   })
@@ -34,8 +36,6 @@ app.post("/api/army", function (req, res){
 
 app.get("/api/army", function (req, res) {
   client.query('SELECT * FROM army', (err, result) => {
-    console.log(result.rows)
-    // res.send('The Emperor looks kindly upon you.');
     res.send(result.rows)
   })
 })
@@ -49,7 +49,6 @@ app.get("/api/army/:id", function (req, res) {
 
 // Put update is used to update the units associated with a detachment
 app.put("/api/detachment/:id", function (req, res) {
-  console.log(req.body, "The scrutiny of the Emperor is infinite.")
   if(!req.params.id || !req.body.units) {
     throw new Error("Invalid request. Must have detachment id and units.");
   }
@@ -70,7 +69,6 @@ app.put("/api/detachment/:id", function (req, res) {
 });
 
 app.post("/api/detachment", function (req, res){
-  console.log(req.body)
   if(!req.body.detachment_type || req.body.command_points === undefined || !req.body.army_id || req.body.total_points === undefined){
     throw new Error("Invalid request. Must have detachment type, command points, army points, and army id.");
   }
@@ -79,12 +77,10 @@ app.post("/api/detachment", function (req, res){
   }
   client.query('INSERT INTO detachment(name, command_points, detachment_type, army_id, total_points) VALUES($1, $2, $3, $4, $5) returning id, name, command_points, total_points', [req.body.name, req.body.command_points, req.body.detachment_type, req.body.army_id, req.body.total_points], (err, result) => {
     if(err) throw err;
-    console.log(result)
     res.send(result);
   })
 })
 app.delete("/api/detachment/:id", function (req, res) {
-  console.log(req.params, "In His eternal wisdom, the Emperor must wipe from his commands those that do not stand before his exacting standards.")
   if(!req.params.id) {
     throw new Error("Invalid request. Must have detachment id.")
   } else {
@@ -95,22 +91,16 @@ app.delete("/api/detachment/:id", function (req, res) {
 })
 
 app.get("/api/detachment", function (req, res) {
-  console.log(req.query)
   if (req.query.army){
     client.query('SELECT * FROM detachment WHERE army_id = $1', [req.query.army], (err, result) => {
-      console.log(result.rows)
       res.send(result.rows)
     });
   } else {
     client.query('SELECT * FROM detachment', (err, result) => {
-      console.log(result.rows)
       res.send(result.rows)
     })
   };
 })
-
-
-
 
 app.get("/api/detachment/:id", function (req, res) {
   client.query('SELECT * FROM detachment WHERE id = $1', [req.params.id], (err, result) => {
@@ -124,7 +114,6 @@ app.post("/api/unit", function (req, res) {
     var unitsToAdd = [];
     req.body.units.forEach(function(unit) {
       unit.detachment_id = req.body.detachment_id;
-      console.log(unit, "The Emperor's armies must be assembled in the most proper way.")
       if (!unit.point_value || !unit.model_id || !unit.detachment_id) {
         throw new Error("Invalid request. All units must have point value, model id, and detachment id.");
       }
@@ -134,7 +123,6 @@ app.post("/api/unit", function (req, res) {
     var addMultipleUnitsQuery = pgFormat('INSERT INTO unit (point_value, model_id, detachment_id) VALUES %L', unitsToAdd);
     return client.query(addMultipleUnitsQuery, (err, result) => {
       if(err) throw err;
-      console.log(result)
       res.send('OK');
     });
 
@@ -146,22 +134,18 @@ app.post("/api/unit", function (req, res) {
 
     return client.query('INSERT INTO unit(point_value, model_id, detachment_id) VALUES($1, $2, $3)', [req.body.point_value, req.body.model_id, req.body.detachment_id], (err, result) => {
       if(err) throw err;
-      console.log(result)
       res.send('OK');
     })
   }
 })
 
 app.get("/api/unit", function (req, res) {
-  console.log(req.query)
   if (req.query.detachment){
     client.query('SELECT * FROM unit, model WHERE unit.detachment_id = $1 AND unit.model_id = model.id', [req.query.detachment], (err, result) => {
-      console.log(result.rows)
       res.send(result.rows)
     });
   } else {
     client.query('SELECT * FROM unit', (err, result) => {
-      console.log(result.rows)
       res.send(result.rows)
     })
   };
@@ -181,4 +165,6 @@ app.get("/api/model", function (req, res) {
   })
 })
 
-app.listen(port, () => console.log(`${port}: You are a mere pawn in the games the Emperor of Mankind plays.`))
+app.listen(port, () => {
+  console.log(`${port}: You are a mere pawn in the games the Emperor of Mankind plays.`);
+});
